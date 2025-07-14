@@ -39,7 +39,7 @@ export default function Footer() {
             </div>
             <div>
               <ul className="space-y-2 underline text-neutral-600 dark:text-neutral-300 font-medium">
-                <li><a href="https://x.com/arjvnz" target="_blank" className="cursor-alias hover:text-neutral-900 dark:hover:text-neutral-200">X(Twitter)</a></li>
+                <li><a href="https://x.com/arjunships" target="_blank" className="cursor-alias hover:text-neutral-900 dark:hover:text-neutral-200">X(Twitter)</a></li>
                 <li><a href="https://github.com/nermalcat69" target="_blank" className="cursor-alias hover:text-neutral-900 dark:hover:text-neutral-200">GitHub</a></li>
                 {/* <li><a href="https://hardcover.app/@arjunaditya" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-900 dark:hover:text-neutral-200">Hardcover</a></li> */}
                 <li><a href="https://www.linkedin.com/in/nermalcat69/" target="_blank" className="cursor-alias hover:text-neutral-900 dark:hover:text-neutral-200">LinkedIn</a></li>
