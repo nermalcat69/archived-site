@@ -1,0 +1,17 @@
+---
+
+---
+
+<div class="center">
+  <slot />
+</div>
+
+<style>
+  .center {
+    box-sizing: content-box;
+    margin-inline: auto;
+    width: calc(100% - (var(--space-xl) * 2));
+    max-inline-size: 800px;
+    padding-inline: var(--space-xl);
+  }
+</style>

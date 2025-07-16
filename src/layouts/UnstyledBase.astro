@@ -1,0 +1,126 @@
+---
+import "../styles/reset.css";
+import "../styles/theme.css";
+
+import { ClientRouter } from "astro:transitions";
+import { join } from "node:path";
+import { AstroFont } from "astro-font";
+import LoadingIndicator from "astro-loading-indicator/component";
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogAlt?: string;
+}
+
+const { title, description, ogImage, ogAlt } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Eva Decker`;
+---
+
+<!doctype html>
+<html lang="en" transition:animate="none">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#FCFCFC" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#111111"
+    />
+    <AstroFont
+      config={[
+        {
+          name: "HEX Franklin",
+          src: [
+            {
+              style: "normal",
+              path: join(
+                process.cwd(),
+                "public",
+                "fonts",
+                "HEX_Franklin_v0.3_Variable.woff2"
+              ),
+            },
+          ],
+          display: "swap",
+          selector: "body",
+          fallback: "sans-serif",
+          cssVariable: "font-sans",
+        },
+        {
+          name: "MonoLisa",
+          src: [
+            {
+              style: "normal",
+              path: join(
+                process.cwd(),
+                "public",
+                "fonts",
+                "MonoLisaVariableNormal.woff2"
+              ),
+            },
+          ],
+          display: "swap",
+          selector: "code",
+          fallback: "monospace",
+          cssVariable: "font-mono",
+        },
+      ]}
+    />
+    <link rel="icon" href="/favicon.svg?v=4" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="/favicon-light.png"
+      type="image/png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/favicon-dark.png"
+      type="image/png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalURL} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Dispatches from Eva Town"
+      href={new URL("rss.xml", Astro.site)}
+    />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Eva Decker" />
+    <meta
+      property="og:image"
+      content={ogImage ?? `${Astro.url.origin}/og/default.png`}
+    />
+    <meta
+      property="og:image:alt"
+      content={ogAlt ?? "Eva designs and builds things for the web."}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{pageTitle}</title>
+    <ClientRouter />
+    <LoadingIndicator color="var(--blue-9)" height="3px" threshold={600} />
+    <script>
+      import * as Fathom from "fathom-client";
+      Fathom.load("WKFTECUZ");
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

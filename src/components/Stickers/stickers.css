@@ -1,0 +1,126 @@
+.stickers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: none;
+  z-index: 999;
+}
+
+.sticker {
+  position: absolute;
+  width: 200px;
+  pointer-events: none;
+}
+
+.sticker:active {
+  cursor: grabbing;
+  pointer-events: auto;
+}
+
+.stickerPath {
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.stickerPath:hover,
+.sticker:active .stickerPath {
+  stroke: var(--amber-9);
+  stroke-width: 6px;
+}
+
+.stickerPicture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  user-select: none;
+}
+
+.stickerSvg {
+  pointer-events: fill;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  user-select: none;
+  filter: drop-shadow(0 1px 1px var(--black-a5));
+}
+
+.shoo-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 999;
+  padding: var(--space-xl);
+}
+
+@keyframes shoo {
+  0% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  15%,
+  30% {
+    transform: rotate(-7deg);
+    opacity: 1;
+  }
+  45% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-9deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  90% {
+    transform: rotate(-9deg);
+  }
+  100% {
+    transform: rotate(8deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+[data-sam-shoo] {
+  background-color: var(--gray-12);
+  border: none;
+  color: var(--gray-1);
+  border-radius: var(--radius-full);
+  padding: var(--space-2xs) var(--space-m);
+  font-weight: var(--font-weight-medium);
+  transition: scale 0.2s ease;
+  transform-origin: 50% 150%;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: var(--shadow-m);
+  animation: slideUp 0.3s ease both;
+}
+
+[data-sam-shoo]:hover {
+  scale: 1.15;
+}
+
+[data-sam-shoo]:active {
+  transform: scale(1.1) rotate(10deg);
+}
+
+[data-sam-shoo].exiting {
+  animation: shoo 0.5s ease-in both;
+}

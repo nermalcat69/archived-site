@@ -1,0 +1,21 @@
+---
+import Center from "../components/Center.astro";
+import Cover from "../components/Cover.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  includeFooter
+  padTop
+  padBottom
+>
+  <Cover>
+    <Center>
+      <slot />
+    </Center>
+  </Cover>
+</BaseLayout>

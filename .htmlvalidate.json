@@ -1,0 +1,16 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "attr-case": "off",
+    "void-style": "off",
+    "element-permitted-content": "off",
+    "no-autoplay": "off",
+    "no-inline-style": "off",
+    "prefer-native-element": [
+      "error",
+      {
+        "exclude": ["button"]
+      }
+    ]
+  }
+}

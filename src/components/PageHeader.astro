@@ -1,0 +1,98 @@
+---
+import dayjs from "dayjs";
+
+import Center from "./Center.astro";
+import { Icon } from "./Icon/Icon";
+import Picture from "./Picture.astro";
+import { RelativeDate } from "./RelativeDate/RelativeDate";
+
+interface Props {
+  title: string;
+  description?: string;
+  img?: ImageMetadata[];
+  imgAlt?: string;
+  datePublished?: Date;
+  dateModified?: Date;
+}
+
+const { title, description, img, imgAlt, datePublished, dateModified } =
+  Astro.props;
+
+const isModifiedSameDay = dayjs(datePublished).isSame(dateModified, "day");
+---
+
+<header class="page-header">
+  <Center>
+    {
+      img && imgAlt && (
+        <div class="page-image">
+          <Picture img={img} imgAlt={imgAlt} />
+        </div>
+      )
+    }
+    <h1 itemprop="name" class="page-title">
+      {title}
+    </h1>
+    {description && <p class="page-subtitle">{description}</p>}
+    {
+      datePublished && (
+        <div class="date">
+          <div class="icon">
+            <Icon icon="seedling" size="20" />
+          </div>
+          <span>
+            Planted <RelativeDate date={datePublished} client:load />
+            {dateModified && !isModifiedSameDay && (
+              <span class="tended">
+                + tended <RelativeDate date={dateModified} client:load />
+              </span>
+            )}
+          </span>
+        </div>
+      )
+    }
+  </Center>
+</header>
+
+<style>
+  .page-header {
+    padding-block-end: var(--space-3xl);
+  }
+
+  .page-image {
+    background: var(--gray-5);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: var(--radius-m);
+    margin-block-start: var(--space-m);
+  }
+
+  .page-title {
+    padding-block-start: var(--space-2xl);
+    line-height: var(--line-height-display);
+  }
+
+  .page-subtitle {
+    font-size: var(--step-2);
+    line-height: var(--line-height-tight);
+    padding-block-start: var(--space-xs);
+  }
+
+  .date {
+    display: flex;
+    align-items: baseline;
+    column-gap: var(--space-2xs);
+    margin-block-start: var(--space-m);
+    font-size: var(--step--1);
+  }
+
+  .icon {
+    align-self: center;
+  }
+
+  .tended {
+    color: var(--gray-11);
+  }
+</style>

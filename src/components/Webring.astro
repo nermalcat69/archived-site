@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  webring: CollectionEntry<"webrings">;
+}
+
+const { webring } = Astro.props;
+const { data } = webring;
+const { title, description, url, prev, next, color } = data;
+---
+
+<div
+  class="webring"
+  style={`--webring-bg: var(--${color}-3); --webring-text: var(--${color}-12); --webring-hover: var(--${color}-4); --webring-border: var(--${color}-5)`}
+>
+  <a class="main" href={url} rel="external">
+    <h2>{title}</h2>
+    <span>{description}</span>
+  </a>
+  <a
+    rel="external"
+    referrerpolicy="strict-origin"
+    href={prev}
+    class="prev"
+    aria-label="Previous website"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="32px"
+      fill="currentColor"
+    >
+      <path d="M7 18V6H9V18H7ZM11 12 17 6V18L11 12Z"></path>
+    </svg>
+  </a>
+  <a
+    rel="external"
+    referrerpolicy="strict-origin"
+    href={next}
+    class="next"
+    aria-label="Next website"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="32px"
+      fill="currentColor"
+    >
+      <path d="M17 6 17 18H15L15 6 17 6ZM13 12 7 18V6L13 12Z"></path>
+    </svg>
+  </a>
+</div>
+
+<style lang="scss">
+  .webring {
+    display: flex;
+    flex-wrap: nowrap;
+    background: var(--webring-bg);
+    color: var(--webring-text);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+
+    .main {
+      flex: 1;
+      text-align: center;
+      padding: var(--space-m);
+
+      h2 {
+        margin: 0;
+        font-size: var(--step-1);
+      }
+
+      span {
+        display: block;
+        margin-block-start: var(--space-2xs);
+        line-height: var(--line-height-tight);
+        text-wrap: balance;
+
+        @media (width < 700px) {
+          font-size: var(--step--1);
+        }
+      }
+    }
+
+    a {
+      text-align: center;
+      text-decoration: none;
+
+      @media (hover: hover) {
+        &:hover {
+          background: var(--webring-hover);
+          font-weight: inherit;
+        }
+      }
+    }
+
+    .prev,
+    .next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 56px;
+    }
+
+    .prev {
+      order: -1;
+      border-right: 1px solid var(--webring-border);
+    }
+
+    .next {
+      border-left: 1px solid var(--webring-border);
+    }
+  }
+</style>

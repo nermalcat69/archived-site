@@ -1,0 +1,134 @@
+---
+import Center from "../components/Center.astro";
+import Synth from "../components/Synth/Synth.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Eva Decker"
+  description="Eva is a designer and web developer based in NYC."
+  includeFooter
+>
+  <Center>
+    <section class="home">
+      <h1 class="visuallyhidden">Eva designs and builds for the web</h1>
+      <div class="intro">
+        <p>
+          <strong><a href="/about" class="inline-link">Eva Decker</a></strong> is
+          a design engineer who likes playing piano and writing CSS. Currently living
+          in NYC with <span class="nowrap"
+            ><a role="button" data-sam-button>Samwise</a>.</span
+          >
+        </p>
+      </div>
+      <div class="synth">
+        <Synth />
+      </div>
+    </section>
+  </Center>
+</BaseLayout>
+
+<script>
+  import * as Fathom from "fathom-client";
+  import { addSam, clearSams, numSams } from "../stores/sam";
+
+  function setupSam() {
+    const samButton = document.querySelector("[data-sam-button]");
+    samButton?.addEventListener("click", () => addSam());
+
+    const shooButton = document.querySelector("[data-sam-shoo]");
+
+    if (shooButton) {
+      shooButton.addEventListener("click", () => {
+        clearSams();
+      });
+
+      numSams.subscribe((num) => {
+        num > 2
+          ? shooButton.classList.add("visible")
+          : shooButton.classList.remove("visible");
+      });
+    }
+  }
+
+  setupSam();
+
+  document.addEventListener("astro:after-swap", () => setupSam());
+
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelector("[data-sam-button]")
+      ?.addEventListener("click", () => {
+        Fathom.trackEvent("stickers: add sam");
+      });
+
+    document.querySelector("[data-sam-shoo]")?.addEventListener("click", () => {
+      Fathom.trackEvent("stickers: shoo sam");
+    });
+  });
+</script>
+
+<style lang="scss">
+  .visuallyhidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+    padding-block-end: var(--space-3xl);
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .work {
+    padding-block: var(--space-3xl) var(--space-xl);
+  }
+
+  .intro {
+    padding-block-start: var(--space-2xl);
+    text-wrap: balance;
+    user-select: none;
+
+    p {
+      font-size: var(--step-4);
+      letter-spacing: var(--letter-spacing-condensed);
+      line-height: var(--line-height-tight);
+    }
+  }
+
+  .synth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (width > 640px) {
+      background: var(--gray-3);
+      border-radius: var(--radius-m);
+      padding: var(--space-xl) var(--space-l);
+    }
+  }
+
+  [data-sam-button] {
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+</style>
