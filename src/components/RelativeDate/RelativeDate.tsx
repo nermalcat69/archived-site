@@ -35,9 +35,14 @@ export const RelativeDate = ({ date }: RelativeDateProps) => {
     formattedTimestamp = dateObj.format("LLL z");
 
     if (dayjs().diff(dateObj, "day") < 2) {
-      // If less than 2 days, display relative date, e.g. "a day ago", "6 hours ago"
-      displayTime = dateObj.fromNow();
-    } else {
+      // If less than 2 days, display relative date
+      if (dayjs().isAfter(dateObj)) {
+        displayTime = dateObj.fromNow(); // e.g. "5 hours ago"
+      } else {
+        displayTime = dateObj.toNow(); // e.g. "in 5 hours"
+      }
+    }
+     else {
       if (dayjs().isSame(date, "year")) {
         // If current year, display month and day, e.g. "Jan 15"
         displayTime = dateObj.format("MMM D");

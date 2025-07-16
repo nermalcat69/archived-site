@@ -10,6 +10,7 @@ export const collections = {
         description: z.string(),
         datePublished: z.date(),
         dateModified: z.date().optional(),
+        category: z.enum(["writing", "social", "product"]).optional(),
         img: z
           .object({
             src: image(),
@@ -80,6 +81,7 @@ export const collections = {
         description: z.string().optional(),
         url: z.string(),
         logo: z.string().optional(),
+        category: z.enum(["social", "product"]),
         features: z
           .object({
             name: z.string(),

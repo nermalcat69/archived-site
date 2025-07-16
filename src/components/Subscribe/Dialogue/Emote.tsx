@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { ReactNode } from "react";
 
 export type EmoteType =
   | "drooling"
@@ -13,28 +12,31 @@ export type EmoteType =
   | "thinking";
   
 export const emoteData: Record<EmoteType, string> = {
-  drooling: "gradiants/gradiant2.png",
-  flushed: "gradiants/gradiant3.png",
-  happy: "gradiants/gradiant4.png",
-  mischief: "gradiants/gradiant5.png",
-  neutral: "gradiants/gradiant6.png",
-  playful: "gradiants/gradiant7.png",
-  sob: "gradiants/gradiant8.png",
-  starstruck: "gradiants/gradiant9.png",
-  thinking: "gradiants/gradiant1.png",
+  drooling: "/gradiants/gradiant2.png",
+  flushed: "/gradiants/gradiant3.png",
+  happy: "/gradiants/gradiant4.png",
+  mischief: "/gradiants/gradiant5.png",
+  neutral: "/gradiants/gradiant6.png",
+  playful: "/gradiants/gradiant7.png",
+  sob: "/gradiants/gradiant8.png",
+  starstruck: "/gradiants/gradiant9.png",
+  thinking: "/gradiants/gradiant1.png",
 };
 
 const emoteList = Object.keys(emoteData) as EmoteType[];
 
 type EmoteProps = {
   initialEmote?: EmoteType;
+  emote?: EmoteType;
+  onEmoteClick?: () => void;
 };
 
-export const Emote = ({ initialEmote = "thinking" }: EmoteProps) => {
-  const [index, setIndex] = useState(emoteList.indexOf(initialEmote));
+export const Emote = ({ initialEmote = "thinking", emote, onEmoteClick }: EmoteProps) => {
+  const [index, setIndex] = useState(emoteList.indexOf(emote || initialEmote));
 
   const handleClick = () => {
     setIndex((prev) => (prev + 1) % emoteList.length);
+    onEmoteClick?.();
   };
 
   const currentEmote = emoteList[index];

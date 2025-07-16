@@ -24,6 +24,16 @@
   text-indent: 0;
 }
 
+.prose em,
+.prose i {
+  font-style: italic;
+}
+
+.prose strong,
+.prose b {
+  font-weight: 600;
+}
+
 .prose p a,
 .prose li a {
   position: relative;

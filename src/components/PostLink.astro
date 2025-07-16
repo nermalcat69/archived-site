@@ -13,9 +13,10 @@ interface Props {
   datePublished?: Date;
   features?: Feature[];
   logo?: string;
+  showImageAbove?: boolean;
 }
 
-const { url, title, description, datePublished, features, logo } = Astro.props;
+const { url, title, description, datePublished, features, logo, showImageAbove } = Astro.props;
 ---
 
 <div class="post">
@@ -26,8 +27,13 @@ const { url, title, description, datePublished, features, logo } = Astro.props;
       </div>
     )
   }
+  {showImageAbove && logo && (
+    <div class="image-above">
+      <img src={logo} alt={`${title} preview`} class="preview-image" />
+    </div>
+  )}
   <div class="title-section">
-    {logo && <img src={logo} alt={`${title} logo`} class="logo" />}
+    {!showImageAbove && logo && <img src={logo} alt={`${title} logo`} class="logo" />}
     <a href={url} class="title">{title}</a>
   </div>
   <span class="description">{description}</span>
@@ -55,6 +61,18 @@ const { url, title, description, datePublished, features, logo } = Astro.props;
   .features {
     color: var(--gray-11);
     font-size: var(--step--1);
+  }
+
+  .image-above {
+    margin-bottom: var(--space-xs);
+  }
+
+  .preview-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
   }
 
   .title-section {

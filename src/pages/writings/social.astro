@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+import PostLink from "src/components/PostLink.astro";
+
+import Center from "../../components/Center.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { smartquotes } from "../../helpers/helpers";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = await getCollection("posts");
+const socialPosts = posts.filter(post => post.data.category === "social");
+socialPosts.sort((a, b) => {
+  return dayjs(b.data.datePublished).isBefore(dayjs(a.data.datePublished))
+    ? -1
+    : 1;
+});
+
+const title = "All Social Experiments";
+const description = `${socialPosts.length} creative and artistic experiments.`;
+---
+
+<BaseLayout title={title} description={description} includeFooter padBottom>
+  <PageHeader title={title} description={description} />
+  <Center>
+    <section>
+      <div class="back-link">
+        <a href="/writings">&larr; Back to Writings</a>
+      </div>
+      {
+        socialPosts.map((post) => (
+          <PostLink
+            url={`/posts/${post.id}`}
+            title={smartquotes(post.data.title)}
+            description={smartquotes(post.data.description)}
+            datePublished={post.data.datePublished}
+            features={post.data.features}
+            logo={post.data.img?.src.src}
+            showImageAbove={true}
+          />
+        ))
+      }
+    </section>
+  </Center>
+</BaseLayout>
+
+<style lang="scss">
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+  }
+
+  .back-link {
+    margin-bottom: var(--space-l);
+    
+    a {
+      color: var(--gray-11);
+      text-decoration: none;
+      font-size: var(--step--1);
+      
+      &:hover {
+        color: var(--gray-12);
+        text-decoration: underline;
+      }
+    }
+  }
+</style> 

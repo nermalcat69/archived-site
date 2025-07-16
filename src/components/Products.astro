@@ -5,7 +5,7 @@ const { products } = Astro.props;
 <div class="products">
   <div class="products-list">
     {
-      products.map((product: { link: string | URL | null | undefined; image: string | null | undefined; name: unknown; }) => (
+      products.map((product: { link: string | URL | null | undefined; image: string | null | undefined; name: string; }) => (
         <div class="product">
           <a href={product.link} target="_blank" rel="noopener noreferrer">
             <img src={product.image} alt={product.name} />

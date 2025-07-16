@@ -113,7 +113,7 @@ const remarks: Record<RemarkType, Remark> = {
       "taking off…",
       "subscribing…",
       "connecting wires…",
-      "reticulating splines…",
+      "Sending a post request…",
       "plugging in…",
       "counting down…",
       "dialing up…",
@@ -273,10 +273,9 @@ export const SubscribeForm = () => {
       <div className="subscribe-content">
         <div className="subscribe-header">
           <div>
-            <h2>Subscribe</h2>
+            <h2>Gib me ur internet mailbox</h2>
             <p>
-              I send emails a few times a year about design and web dev. Written
-              like notes to friends.
+              I'm not sure what I'll send you, but I'll try to make it interesting.
             </p>
           </div>
         </div>
