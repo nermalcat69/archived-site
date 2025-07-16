@@ -79,6 +79,7 @@ export const collections = {
         datePublished: z.date(),
         description: z.string().optional(),
         url: z.string(),
+        logo: z.string().optional(),
         features: z
           .object({
             name: z.string(),

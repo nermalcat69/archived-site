@@ -3,14 +3,14 @@ import classNames from "classnames";
 import { AnimatePresence } from "motion/react";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { clearSams, numSams } from "../../stores/sam";
+import { clearStickers, numStickers } from "../../stores/sticker";
 import { STICKER_VARIANTS, Sticker, type StickerProps } from "./Sticker";
 
 export const Stickers = () => {
   const [stickers, setStickers] = useState<StickerProps[]>([]);
   const [showShoo, setShowShoo] = useState(false);
   const [exiting, setExiting] = useState(false);
-  const $numSams = useStore(numSams);
+  const $numStickers = useStore(numStickers);
 
   useEffect(() => {
     // Preload first sticker
@@ -18,28 +18,28 @@ export const Stickers = () => {
   }, []);
 
   useEffect(() => {
-    if ($numSams === 0) {
+    if ($numStickers === 0) {
       setStickers([]);
       setShowShoo(false);
       return;
     }
 
-    setShowShoo($numSams > 2);
+    setShowShoo($numStickers > 2);
 
-    if ($numSams > stickers.length) {
+    if ($numStickers > stickers.length) {
       setStickers((prev) => [
         ...prev,
         {
           id: nanoid(),
-          variant: $numSams,
+          variant: $numStickers,
         },
       ]);
     }
-  }, [$numSams, stickers.length]);
+  }, [$numStickers, stickers.length]);
 
   const handleShoo = () => {
     setExiting(true);
-    clearSams();
+    clearStickers();
     setTimeout(() => {
       setExiting(false);
     }, 300);

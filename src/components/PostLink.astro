@@ -12,9 +12,10 @@ interface Props {
   description?: string;
   datePublished?: Date;
   features?: Feature[];
+  logo?: string;
 }
 
-const { url, title, description, datePublished, features } = Astro.props;
+const { url, title, description, datePublished, features, logo } = Astro.props;
 ---
 
 <div class="post">
@@ -25,7 +26,10 @@ const { url, title, description, datePublished, features } = Astro.props;
       </div>
     )
   }
-  <a href={url} class="title">{title}</a>
+  <div class="title-section">
+    {logo && <img src={logo} alt={`${title} logo`} class="logo" />}
+    <a href={url} class="title">{title}</a>
+  </div>
   <span class="description">{description}</span>
   {
     features && (
@@ -51,6 +55,20 @@ const { url, title, description, datePublished, features } = Astro.props;
   .features {
     color: var(--gray-11);
     font-size: var(--step--1);
+  }
+
+  .title-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .logo {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
   }
 
   .title {

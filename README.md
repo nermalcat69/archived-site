@@ -6,7 +6,7 @@
 
 </div>
 
-# Eva Decker
+# Arjun Aditya
 
 This is the source code for [eva.town](https://eva.town), designed, coded, and written by Eva—that's me! It's a place for me to share notes and learn in public. I try to update things regularly.
 

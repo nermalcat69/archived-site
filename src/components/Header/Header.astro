@@ -8,8 +8,8 @@ const topLevelPath = currentPath.split("/")[1];
 
 const navigation = [
   {
-    label: "Garden",
-    url: "/garden",
+    label: "Writings",
+    url: "/writings",
   },
   {
     label: "About",
@@ -38,10 +38,6 @@ const navigation = [
             </a>
           ))
         }
-        <button type="button" data-theme-toggle aria-label="Toggle theme">
-          <Icon icon="sun" size="20" variant="line" className="sun" />
-          <Icon icon="moon" size="20" variant="line" className="moon" />
-        </button>
       </div>
     </nav>
   </Center>
@@ -49,58 +45,7 @@ const navigation = [
 
 <script>
   import * as Fathom from "fathom-client";
-  import { gray, grayDark } from "@radix-ui/colors";
-  import {
-    TRANSITION_BEFORE_SWAP,
-    isTransitionBeforeSwapEvent,
-  } from "astro:transitions/client";
 
-  type Theme = "light" | "dark";
-
-  function getActiveTheme(): Theme {
-    return document.body.classList.contains("dark") ? "dark" : "light";
-  }
-
-  function setActiveTheme(theme: Theme, document = window.document) {
-    theme === "light"
-      ? document.body.classList.remove("dark")
-      : document.body.classList.add("dark");
-
-    // Update localStorage
-    window.localStorage.setItem("theme", theme);
-
-    // Update meta theme
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme !== null)
-      metaTheme.setAttribute(
-        "content",
-        theme === "dark" ? grayDark.gray1 : gray.gray1
-      );
-  }
-
-  function setupToggle(document = window.document) {
-    let toggleButton = document.querySelector("[data-theme-toggle]");
-
-    toggleButton &&
-      toggleButton.addEventListener("click", () => handleToggleTheme());
-  }
-
-  function handleToggleTheme() {
-    setActiveTheme(getActiveTheme() === "light" ? "dark" : "light");
-
-    Fathom.trackEvent("nav: toggle theme");
-  }
-
-  // Run on initial load
-  setupToggle();
-
-  document.addEventListener(TRANSITION_BEFORE_SWAP, (ev) => {
-    if (isTransitionBeforeSwapEvent(ev)) {
-      // Run after view transitions
-      setupToggle(ev.newDocument);
-      setActiveTheme(getActiveTheme(), ev.newDocument);
-    }
-  });
 
   document.addEventListener("astro:page-load", () => {
     document.querySelectorAll("[data-fathom='nav-link']").forEach((navlink) => {
@@ -120,6 +65,7 @@ const navigation = [
     background-color: var(--gray-1);
     top: 0;
     z-index: 10;
+    border-bottom: 1px solid var(--gray-6);
   }
 
   nav {
@@ -183,11 +129,4 @@ const navigation = [
     }
   }
 
-  :global(body:not(.dark) .moon) {
-    transform: rotate(60deg);
-  }
-
-  :global(.dark .sun) {
-    transform: rotate(-60deg);
-  }
 </style>

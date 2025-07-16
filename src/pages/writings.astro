@@ -44,6 +44,21 @@ const description = "Every garden starts somewhere. This is mine.";
       }
     </section>
     <section>
+      <h2>Social Experiments</h2>
+      {
+        experiments.map((experiment) => (
+          <PostLink
+            url={experiment.data.url}
+            title={experiment.data.title}
+            description={experiment.data.description}
+            datePublished={experiment.data.datePublished}
+            features={experiment.data.features}
+            logo={experiment.data.logo}
+          />
+        ))
+      }
+    </section>
+    <section>
       <h2>Experiments</h2>
       {
         experiments.map((experiment) => (
@@ -53,10 +68,12 @@ const description = "Every garden starts somewhere. This is mine.";
             description={experiment.data.description}
             datePublished={experiment.data.datePublished}
             features={experiment.data.features}
+            logo={experiment.data.logo}
           />
         ))
       }
     </section>
+
   </Center>
 </BaseLayout>
 

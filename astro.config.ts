@@ -1,8 +1,7 @@
-import db from "@astrojs/db";
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
-import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
+import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
@@ -23,10 +22,9 @@ export default defineConfig({
     }),
     mdx(),
     sitemap(),
-    db(),
   ],
   trailingSlash: "never",
-  adapter: netlify(),
+  adapter: vercel(),
   markdown: {
     rehypePlugins: [rehypeHeadingIds, [rehypeAutolinkHeadings, autolinkConfig]],
     remarkPlugins: [imgAttr],
