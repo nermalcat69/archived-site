@@ -1,20 +1,57 @@
 ---
-
+const { products } = Astro.props;
 ---
 
 <div class="products">
-    <p>Products</p>
-</div>
-  
-  <style>
-    .products {
-      display: flex;
-      flex-direction: column;
-
-      justify-content: center;
-      background-color: var(--gray-3);
-      padding: var(--space-l);
-      border-radius: var(--radius-m);
+  <div class="products-list">
+    {
+      products.map((product: { link: string | URL | null | undefined; image: string | null | undefined; name: unknown; }) => (
+        <div class="product">
+          <a href={product.link} target="_blank" rel="noopener noreferrer">
+            <img src={product.image} alt={product.name} />
+            <p>{product.name}</p>
+          </a>
+        </div>
+      ))
     }
-  </style>
-  
+  </div>
+</div>
+
+<style>
+  .products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--gray-2);
+    border: 1px solid var(--gray-5);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+  }
+
+  .products-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-l);
+    margin-top: var(--space-s);
+  }
+
+
+  .product img {
+    max-width: 64px;
+    max-height: 64px;
+    object-fit: contain;
+    border-radius: var(--radius-s);
+    margin-bottom: 0.5em;
+    border: 1px solid var(--gray-7);
+  }
+
+  .product p {
+    font-size: 0.875rem;
+    color: var(--gray-11);
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+  }
+</style>

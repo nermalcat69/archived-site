@@ -1,0 +1,14 @@
+---
+import ProductSection from './Products.astro';
+
+const products = [
+  { name: "RukList", image: "/logos/ruk.svg", link: "https://ruklist.com" },
+  { name: "SQLBase", image: "/logos/sqlbase.svg", link: "https://sqlbase.io" },
+  { name: "Promptu", image: "/logos/promptu.svg", link: "https://promptu.dev" },
+  { name: "Scan", image: "/logos/scan-domains.png", link: "https://scan.nermalcat69.dev" },
+];
+---
+
+<div>
+    <ProductSection products={products} />
+</div>
