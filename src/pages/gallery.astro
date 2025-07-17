@@ -116,22 +116,6 @@ const imagesJson = JSON.stringify(images);
             ))
           }
     </div>
-
-    <!-- Modal -->
-    <div id="imageModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <img id="modalImage" src="" alt="" />
-            <div class="modal-info">
-                <p id="modalCaption"></p>
-                <div class="modal-nav">
-                    <button id="prevImage">‹ Previous</button>
-                    <span id="imageCounter">1 / {images.length}</span>
-                    <button id="nextImage">Next ›</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </ProseLayout>
 
 <style>
@@ -142,22 +126,19 @@ const imagesJson = JSON.stringify(images);
     }
 
     .view-toggle {
-        background: var(--blue-9);
-        color: white;
+        background: var(--gray-4);
+        color: var(--gray-12);
         border: none;
-        padding: var(--space-s) var(--space-m);
+        padding: var(--space-xs) var(--space-s);
         border-radius: var(--radius-s);
         cursor: pointer;
-        font-size: var(--step-0);
+        font-size: var(--step--1);
         font-weight: var(--font-weight-medium);
         transition: all 0.2s ease;
-        box-shadow: var(--shadow-s);
     }
 
     .view-toggle:hover {
-        background: var(--blue-10);
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-m);
+        background: var(--gray-3);
     }
 
     .gallery {
@@ -181,11 +162,21 @@ const imagesJson = JSON.stringify(images);
         grid-column: span 1 !important;
         grid-row: span 1 !important;
         height: auto;
-        aspect-ratio: 16/9;
+        aspect-ratio: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .gallery.single-column .gallery-item.portrait {
-        aspect-ratio: 4/5;
+    .gallery.single-column .gallery-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: contain;
+    }
+
+    .gallery.single-column .gallery-item:hover img {
+        transform: none;
     }
 
     .gallery-item {
@@ -439,14 +430,6 @@ const imagesJson = JSON.stringify(images);
     const gallery = document.getElementById('gallery');
     const viewToggle = document.getElementById('viewToggle');
     const toggleText = document.getElementById('toggleText');
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-    const closeModal = document.getElementById('closeModal');
-    const prevButton = document.getElementById('prevImage');
-    const nextButton = document.getElementById('nextImage');
-    const imageCounter = document.getElementById('imageCounter');
-
     // View toggle functionality
     viewToggle?.addEventListener('click', () => {
         isGridMode = !isGridMode;
@@ -454,84 +437,5 @@ const imagesJson = JSON.stringify(images);
         if (toggleText) {
             toggleText.textContent = isGridMode ? 'Single Column' : 'Grid View';
         }
-    });
-
-    // Modal functionality
-    function openModal(index) {
-        currentImageIndex = index;
-        const image = imageData[index];
-        
-        if (modalImage && modalCaption && imageCounter) {
-            modalImage.src = image.src;
-            modalImage.alt = image.alt;
-            modalCaption.textContent = image.alt;
-            imageCounter.textContent = `${index + 1} / ${imageData.length}`;
-        }
-        
-        updateNavigationButtons();
-        modal?.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModalFunc() {
-        modal?.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function updateNavigationButtons() {
-        if (prevButton && nextButton) {
-            prevButton.disabled = currentImageIndex === 0;
-            nextButton.disabled = currentImageIndex === imageData.length - 1;
-        }
-    }
-
-    function showPrevImage() {
-        if (currentImageIndex > 0) {
-            openModal(currentImageIndex - 1);
-        }
-    }
-
-    function showNextImage() {
-        if (currentImageIndex < imageData.length - 1) {
-            openModal(currentImageIndex + 1);
-        }
-    }
-
-    // Event listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        // Gallery item clicks
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => openModal(index));
-        });
-
-        // Modal controls
-        closeModal?.addEventListener('click', closeModalFunc);
-        prevButton?.addEventListener('click', showPrevImage);
-        nextButton?.addEventListener('click', showNextImage);
-
-        // Close modal on background click
-        modal?.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModalFunc();
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (modal?.classList.contains('active')) {
-                switch (e.key) {
-                    case 'Escape':
-                        closeModalFunc();
-                        break;
-                    case 'ArrowLeft':
-                        showPrevImage();
-                        break;
-                    case 'ArrowRight':
-                        showNextImage();
-                        break;
-                }
-            }
-        });
     });
 </script>

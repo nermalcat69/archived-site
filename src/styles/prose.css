@@ -111,7 +111,7 @@
 }
 
 .prose p + p {
-  text-indent: 1.3em;
+  text-indent: 0; /* 1.3em before */
 }
 
 .prose * + ul,
@@ -140,6 +140,7 @@
 
 .prose li {
   position: relative;
+  margin-bottom: 10px;
 }
 
 .prose li::before {
