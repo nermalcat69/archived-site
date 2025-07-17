@@ -12,6 +12,7 @@
 .prose > *,
 .prose .no-bleed {
   grid-column: 2;
+  margin-bottom: 18px;
 }
 
 .prose .full-bleed {
@@ -27,6 +28,9 @@
 .prose em,
 .prose i {
   font-style: italic;
+  font-synthesis: style;
+  font-variation-settings: "slnt" -12;
+  font-family: var(--font-sans);
 }
 
 .prose strong,
@@ -328,4 +332,16 @@
   &::before {
     content: "\a0⁕ ⁕ ⁕";
   }
+}
+
+.prose .text-red {
+  color: var(--red-9);
+}
+
+.prose .text-red-light {
+  color: var(--red-8);
+}
+
+.prose .text-red-dark {
+  color: var(--red-11);
 }
