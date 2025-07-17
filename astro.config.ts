@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeExternalLinks from "rehype-external-links";
 import imgAttr from "remark-imgattr";
 import { autolinkConfig } from "./plugins/rehype-autolink-config";
 
@@ -20,13 +21,21 @@ export default defineConfig({
           "'MonoLisa', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
       },
     }),
-    mdx(),
+    mdx({
+      rehypePlugins: [
+        [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
+      ],
+    }),
     sitemap(),
   ],
   trailingSlash: "never",
   adapter: node({ mode: "standalone" }),
   markdown: {
-    rehypePlugins: [rehypeHeadingIds, [rehypeAutolinkHeadings, autolinkConfig]],
+    rehypePlugins: [
+      rehypeHeadingIds, 
+      [rehypeAutolinkHeadings, autolinkConfig],
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
+    ],
     remarkPlugins: [imgAttr],
   },
   vite: {
