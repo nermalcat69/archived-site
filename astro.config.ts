@@ -1,7 +1,6 @@
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import vercel from "@astrojs/vercel";
 import node from '@astrojs/node';
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";

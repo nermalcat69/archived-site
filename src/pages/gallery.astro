@@ -108,7 +108,7 @@ const imagesJson = JSON.stringify(images);
         {
             images.map((image, index) => (
               <div class={`gallery-item ${image.orientation}`} data-index={index}>
-                <img src={image.src} alt={image.alt} loading="lazy" />
+                <img src={image.src} loading="lazy" alt={image.alt} />
                 <div class="overlay">
                   <p>{image.alt}</p>
                 </div>
