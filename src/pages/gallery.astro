@@ -1,0 +1,537 @@
+---
+import ProseLayout from "src/layouts/ProseLayout.astro";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+
+const title = "Gallery";
+const description = "A collection of photos taken by Arjun Aditya";
+
+interface ImageData {
+    src: string;
+    alt: string;
+    orientation: "portrait" | "horizontal";
+}
+
+// Function to create layout patterns
+function createLayoutPatterns(totalImages: number): ("portrait" | "horizontal")[] {
+    const patterns: ("portrait" | "horizontal")[] = [];
+    const patternTypes: ("portrait" | "horizontal")[][] = [
+        // Pattern 1: 2 horizontal images
+        ["horizontal", "horizontal"],
+        // Pattern 2: 1 horizontal + 2 portrait
+        ["horizontal", "portrait", "portrait"],
+        // Pattern 3: 4 portrait images
+        ["portrait", "portrait", "portrait", "portrait"]
+    ];
+    
+    let remainingImages = totalImages;
+    
+    while (remainingImages > 0) {
+        let availablePatterns = patternTypes.filter(pattern => pattern.length <= remainingImages);
+        
+        // If we have exactly 1 image left, make it portrait
+        if (remainingImages === 1) {
+            patterns.push("portrait");
+            remainingImages--;
+            continue;
+        }
+        
+        // If we have exactly 3 images left, use pattern 2 (1 horizontal + 2 portrait)
+        if (remainingImages === 3) {
+            patterns.push(...patternTypes[1]);
+            remainingImages -= 3;
+            continue;
+        }
+        
+        // Randomly choose from available patterns
+        const randomPattern = availablePatterns[Math.floor(Math.random() * availablePatterns.length)];
+        patterns.push(...randomPattern);
+        remainingImages -= randomPattern.length;
+    }
+    
+    return patterns;
+}
+
+// Function to create alt text from filename
+function createAltText(filename: string): string {
+    return filename
+        .replace(/\.(jpg|jpeg|png|webp|heic)$/i, '')
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+// Read images from public/gallery directory
+let images: ImageData[] = [];
+
+try {
+    const galleryPath = join(process.cwd(), 'public', 'gallery');
+    const files = await readdir(galleryPath);
+    
+    // Filter for image files
+    const imageFiles = files
+        .filter(file => /\.(jpg|jpeg|png|webp|heic)$/i.test(file))
+        .sort(); // Sort alphabetically
+    
+    // Create layout patterns for all images
+    const orientations = createLayoutPatterns(imageFiles.length);
+    
+    // Create image data with assigned orientations
+    images = imageFiles.map((file, index) => ({
+        src: `/gallery/${file}`,
+        alt: createAltText(file),
+        orientation: orientations[index]
+    }));
+} catch (error) {
+    console.error('Error reading gallery directory:', error);
+    // Fallback images if directory doesn't exist
+    images = [
+        {
+            src: "/gallery/img21.JPG",
+            alt: "Sample Image",
+            orientation: "portrait",
+        }
+    ];
+}
+
+// Convert images to JSON for script section
+const imagesJson = JSON.stringify(images);
+---
+
+<ProseLayout title={title} description={description}>
+    <div class="gallery-controls">
+        <button id="viewToggle" class="view-toggle">
+            <span id="toggleText">Single Column</span>
+        </button>
+    </div>
+    
+    <div class="gallery" id="gallery">
+        {
+            images.map((image, index) => (
+              <div class={`gallery-item ${image.orientation}`} data-index={index}>
+                <img src={image.src} alt={image.alt} loading="lazy" />
+                <div class="overlay">
+                  <p>{image.alt}</p>
+                </div>
+              </div>
+            ))
+          }
+    </div>
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <img id="modalImage" src="" alt="" />
+            <div class="modal-info">
+                <p id="modalCaption"></p>
+                <div class="modal-nav">
+                    <button id="prevImage">‹ Previous</button>
+                    <span id="imageCounter">1 / {images.length}</span>
+                    <button id="nextImage">Next ›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ProseLayout>
+
+<style>
+    .gallery-controls {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: var(--space-m);
+    }
+
+    .view-toggle {
+        background: var(--blue-9);
+        color: white;
+        border: none;
+        padding: var(--space-s) var(--space-m);
+        border-radius: var(--radius-s);
+        cursor: pointer;
+        font-size: var(--step-0);
+        font-weight: var(--font-weight-medium);
+        transition: all 0.2s ease;
+        box-shadow: var(--shadow-s);
+    }
+
+    .view-toggle:hover {
+        background: var(--blue-10);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-m);
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-m);
+        padding: var(--space-l) 0;
+        grid-auto-rows: 250px;
+        transition: all 0.3s ease;
+    }
+
+    .gallery.single-column {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        max-width: 700px;
+        margin: 0 auto;
+        gap: var(--space-l);
+    }
+
+    .gallery.single-column .gallery-item {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    .gallery.single-column .gallery-item.portrait {
+        aspect-ratio: 4/5;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-m);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .gallery-item.horizontal {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    .gallery-item.portrait {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-4px) scale(1.02);
+        z-index: 10;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--radius-m);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: white;
+        padding: var(--space-m);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .overlay {
+        transform: translateY(0);
+    }
+
+    .overlay p {
+        margin: 0;
+        font-size: var(--step-0);
+        font-weight: 500;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(211, 211, 211, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        backdrop-filter: blur(8px);
+    }
+
+    .modal.active {
+        display: flex;
+        opacity: 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: modalSlideIn 0.3s ease;
+        background: white;
+        border-radius: var(--radius-l);
+        padding: var(--space-l);
+        box-shadow: var(--shadow-l);
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            transform: scale(0.8) translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: var(--space-s);
+        right: var(--space-s);
+        color: var(--gray-11);
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+        transition: color 0.2s ease;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-s);
+        background: var(--gray-3);
+    }
+
+    .close:hover {
+        color: var(--gray-12);
+        background: var(--gray-4);
+    }
+
+    #modalImage {
+        max-width: 100%;
+        max-height: calc(90vh - 160px);
+        object-fit: contain;
+        border-radius: var(--radius-s);
+        box-shadow: var(--shadow-m);
+    }
+
+    .modal-info {
+        color: var(--gray-12);
+        text-align: center;
+        margin-top: var(--space-m);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-m);
+    }
+
+    .modal-nav {
+        display: flex;
+        gap: var(--space-m);
+        align-items: center;
+    }
+
+    .modal-nav button {
+        background: var(--gray-3);
+        color: var(--gray-12);
+        border: 1px solid var(--gray-6);
+        padding: var(--space-s) var(--space-m);
+        border-radius: var(--radius-s);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: var(--font-weight-medium);
+    }
+
+    .modal-nav button:hover {
+        background: var(--gray-4);
+        border-color: var(--gray-7);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-s);
+    }
+
+    .modal-nav button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    #imageCounter {
+        color: var(--gray-11);
+        font-size: var(--step--1);
+        font-weight: var(--font-weight-medium);
+        padding: 0 var(--space-s);
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+        .gallery {
+            gap: var(--space-s);
+            grid-auto-rows: 200px;
+        }
+
+        .modal-content {
+            max-width: 95vw;
+            max-height: 95vh;
+            padding: var(--space-m);
+        }
+
+        #modalImage {
+            max-height: calc(95vh - 180px);
+        }
+
+        .modal-nav {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .modal-nav button {
+            width: 100%;
+        }
+
+        #imageCounter {
+            order: -1;
+            margin-bottom: var(--space-s);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .gallery {
+            grid-template-columns: 1fr;
+            gap: var(--space-s);
+            grid-auto-rows: 180px;
+        }
+        
+        .gallery-item.horizontal,
+        .gallery-item.portrait {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .gallery-controls {
+            justify-content: center;
+        }
+    }
+
+    /* Ensure grid doesn't break with different orientations */
+    @media (min-width: 769px) {
+        .gallery:not(.single-column) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+</style>
+
+<script define:vars={{ images: imagesJson }}>
+    // Parse images from Astro
+    const imageData = JSON.parse(images);
+    
+    let currentImageIndex = 0;
+    let isGridMode = true;
+
+    // DOM elements
+    const gallery = document.getElementById('gallery');
+    const viewToggle = document.getElementById('viewToggle');
+    const toggleText = document.getElementById('toggleText');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeModal = document.getElementById('closeModal');
+    const prevButton = document.getElementById('prevImage');
+    const nextButton = document.getElementById('nextImage');
+    const imageCounter = document.getElementById('imageCounter');
+
+    // View toggle functionality
+    viewToggle?.addEventListener('click', () => {
+        isGridMode = !isGridMode;
+        gallery?.classList.toggle('single-column', !isGridMode);
+        if (toggleText) {
+            toggleText.textContent = isGridMode ? 'Single Column' : 'Grid View';
+        }
+    });
+
+    // Modal functionality
+    function openModal(index) {
+        currentImageIndex = index;
+        const image = imageData[index];
+        
+        if (modalImage && modalCaption && imageCounter) {
+            modalImage.src = image.src;
+            modalImage.alt = image.alt;
+            modalCaption.textContent = image.alt;
+            imageCounter.textContent = `${index + 1} / ${imageData.length}`;
+        }
+        
+        updateNavigationButtons();
+        modal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalFunc() {
+        modal?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function updateNavigationButtons() {
+        if (prevButton && nextButton) {
+            prevButton.disabled = currentImageIndex === 0;
+            nextButton.disabled = currentImageIndex === imageData.length - 1;
+        }
+    }
+
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            openModal(currentImageIndex - 1);
+        }
+    }
+
+    function showNextImage() {
+        if (currentImageIndex < imageData.length - 1) {
+            openModal(currentImageIndex + 1);
+        }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        // Gallery item clicks
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => openModal(index));
+        });
+
+        // Modal controls
+        closeModal?.addEventListener('click', closeModalFunc);
+        prevButton?.addEventListener('click', showPrevImage);
+        nextButton?.addEventListener('click', showNextImage);
+
+        // Close modal on background click
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal?.classList.contains('active')) {
+                switch (e.key) {
+                    case 'Escape':
+                        closeModalFunc();
+                        break;
+                    case 'ArrowLeft':
+                        showPrevImage();
+                        break;
+                    case 'ArrowRight':
+                        showNextImage();
+                        break;
+                }
+            }
+        });
+    });
+</script>
