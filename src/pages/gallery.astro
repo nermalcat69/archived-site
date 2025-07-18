@@ -67,9 +67,9 @@ try {
     const galleryPath = join(process.cwd(), 'public', 'gallery');
     const files = await readdir(galleryPath);
     
-    // Filter for image files
+    // Filter for only .webp and .JPG files
     const imageFiles = files
-        .filter(file => /\.(jpg|jpeg|png|webp|heic)$/i.test(file))
+        .filter(file => /\.(webp|JPG)$/.test(file))
         .sort(); // Sort alphabetically
     
     // Create layout patterns for all images
@@ -88,7 +88,7 @@ try {
         {
             src: "/gallery/img21.JPG",
             alt: "Sample Image",
-            orientation: "portrait",
+            orientation: "portrait" as const,
         }
     ];
 }
@@ -108,7 +108,12 @@ const imagesJson = JSON.stringify(images);
         {
             images.map((image, index) => (
               <div class={`gallery-item ${image.orientation}`} data-index={index}>
-                <img src={image.src} loading="lazy" alt={image.alt} />
+                <img 
+                    src={image.src} 
+                    alt={image.alt} 
+                    loading="lazy"
+                    decoding="async"
+                />
                 <div class="overlay">
                   <p>{image.alt}</p>
                 </div>
@@ -419,17 +424,17 @@ const imagesJson = JSON.stringify(images);
     }
 </style>
 
-<script define:vars={{ images: imagesJson }}>
+<script is:inline define:vars={{ images: imagesJson }}>
     // Parse images from Astro
     const imageData = JSON.parse(images);
     
-    let currentImageIndex = 0;
     let isGridMode = true;
 
     // DOM elements
     const gallery = document.getElementById('gallery');
     const viewToggle = document.getElementById('viewToggle');
     const toggleText = document.getElementById('toggleText');
+    
     // View toggle functionality
     viewToggle?.addEventListener('click', () => {
         isGridMode = !isGridMode;

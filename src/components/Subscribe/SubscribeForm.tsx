@@ -121,7 +121,7 @@ const remarks: Record<RemarkType, Remark> = {
     emote: "thinking",
   },
   success: {
-    text: ["yeah! get ready for e-mail (eva-mail)"],
+    text: ["yeah! get ready for e-mail"],
     emote: "starstruck",
   },
   error: {
@@ -220,7 +220,7 @@ export const SubscribeForm = () => {
     displayNewRemark("submitting", { force: true });
 
     const url =
-      "https://buttondown.email/api/emails/embed-subscribe/notesfromeva";
+      "https://buttondown.email/api/emails/embed-subscribe/arjunaditya";
     const data = new FormData(e.target as HTMLFormElement);
 
     fetch(url, { method: "POST", body: data })

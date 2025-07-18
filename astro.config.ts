@@ -48,6 +48,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["fsevents"],
     },
+    assetsInclude: ["**/*.heic", "**/*.HEIC"],
   },
   redirects: {
     "/projects": "/",
