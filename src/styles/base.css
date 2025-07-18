@@ -20,9 +20,7 @@ body {
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
-
 
 ::selection {
   background: var(--amber-4);
@@ -73,8 +71,8 @@ small {
 code,
 pre {
   font-family: var(--font-mono);
-  font-feature-settings:
-    "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "zero", "onum";
+  font-feature-settings: "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "zero",
+    "onum";
 }
 
 strong {
@@ -85,8 +83,7 @@ a {
   text-decoration: underline;
   text-decoration-color: var(--gray-8);
   text-underline-offset: max(0.1em, 2.5px);
-  transition:
-    text-decoration-color 0.2s ease-in-out,
+  transition: text-decoration-color 0.2s ease-in-out,
     font-weight 0.2s ease-in-out;
 }
 
@@ -123,12 +120,11 @@ a {
   border-radius: 20px;
   background-color: #1a1a1a;
   padding: 2px;
-
 }
 
 .synth {
   display: flex;
-  justify-content: start; 
+  justify-content: start;
   margin-top: 20px;
 }
 

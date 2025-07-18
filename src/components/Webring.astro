@@ -7,7 +7,7 @@ interface Props {
 
 const { webring } = Astro.props;
 const { data } = webring;
-const { title, description, url, prev, next, color } = data;
+const { title, description, url, color } = data;
 ---
 
 <div
@@ -17,38 +17,6 @@ const { title, description, url, prev, next, color } = data;
   <a class="main" href={url} rel="external">
     <h2>{title}</h2>
     <span>{description}</span>
-  </a>
-  <a
-    rel="external"
-    referrerpolicy="strict-origin"
-    href={prev}
-    class="prev"
-    aria-label="Previous website"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="32px"
-      fill="currentColor"
-    >
-      <path d="M7 18V6H9V18H7ZM11 12 17 6V18L11 12Z"></path>
-    </svg>
-  </a>
-  <a
-    rel="external"
-    referrerpolicy="strict-origin"
-    href={next}
-    class="next"
-    aria-label="Next website"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="32px"
-      fill="currentColor"
-    >
-      <path d="M17 6 17 18H15L15 6 17 6ZM13 12 7 18V6L13 12Z"></path>
-    </svg>
   </a>
 </div>
 

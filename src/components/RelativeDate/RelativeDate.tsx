@@ -41,8 +41,7 @@ export const RelativeDate = ({ date }: RelativeDateProps) => {
       } else {
         displayTime = dateObj.toNow(); // e.g. "in 5 hours"
       }
-    }
-     else {
+    } else {
       if (dayjs().isSame(date, "year")) {
         // If current year, display month and day, e.g. "Jan 15"
         displayTime = dateObj.format("MMM D");

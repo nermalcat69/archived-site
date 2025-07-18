@@ -10,7 +10,7 @@ export type EmoteType =
   | "sob"
   | "starstruck"
   | "thinking";
-  
+
 export const emoteData: Record<EmoteType, string> = {
   drooling: "/gradiants/gradiant2.png",
   flushed: "/gradiants/gradiant3.png",
@@ -31,7 +31,11 @@ type EmoteProps = {
   onEmoteClick?: () => void;
 };
 
-export const Emote = ({ initialEmote = "thinking", emote, onEmoteClick }: EmoteProps) => {
+export const Emote = ({
+  initialEmote = "thinking",
+  emote,
+  onEmoteClick,
+}: EmoteProps) => {
   const [index, setIndex] = useState(emoteList.indexOf(emote || initialEmote));
 
   const handleClick = () => {
@@ -50,8 +54,11 @@ export const Emote = ({ initialEmote = "thinking", emote, onEmoteClick }: EmoteP
       onKeyDown={(e) => e.key === "Enter" && handleClick()}
       aria-label={`${currentEmote} emote`}
     >
-      <img src={src} alt={`${currentEmote} gradient`} className="rounded-badge" />
+      <img
+        src={src}
+        alt={`${currentEmote} gradient`}
+        className="rounded-badge"
+      />
     </button>
   );
 };
-

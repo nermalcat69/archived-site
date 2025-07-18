@@ -160,7 +160,7 @@ export const Icon = ({ icon, variant, size, className }: IconProps) => {
       className={classNames(
         "icon",
         { small: size === "20", extraSmall: size === "16" },
-        className,
+        className
       )}
       aria-hidden="true"
     >

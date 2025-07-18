@@ -114,8 +114,8 @@
   text-indent: 0; /* 1.3em before */
 }
 
+/* .prose * + ol, */ */
 .prose * + ul,
-.prose * + ol,
 .prose * + blockquote {
   margin-top: var(--space-l);
 }

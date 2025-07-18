@@ -146,7 +146,7 @@ const getRandomRemark = (remarks: string[]): string => {
 
 export const SubscribeForm = () => {
   const [currentRemarkType, setCurrentRemarkType] = useState<RemarkType | null>(
-    null,
+    null
   );
   const [justDisplayedRemarks, setJustDisplayedRemarks] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState<string>("");
@@ -162,7 +162,7 @@ export const SubscribeForm = () => {
 
   const displayNewRemark = (
     remarkType: RemarkType,
-    options?: { force?: boolean },
+    options?: { force?: boolean }
   ) => {
     const shouldDisplayNewRemark =
       options?.force === true || !justDisplayedRemarks;
@@ -275,7 +275,8 @@ export const SubscribeForm = () => {
           <div>
             <h2>Gib me ur internet mailbox</h2>
             <p>
-              I'm not sure what I'll send you, but I'll try to make it interesting.
+              I'm not sure what I'll send you, but I'll try to make it
+              interesting.
             </p>
           </div>
         </div>

@@ -12,7 +12,7 @@ ogImage: ./img1200.webp
 
 This website is a forked version of [eva.town](https://eva.town) - [source code](https://github.com/evadecker/eva.town).
 
------
+---
 
 On the flip side, if you're doing something cool and want to connect with me feel free to [dm me](https://x.com/arjunships)
 

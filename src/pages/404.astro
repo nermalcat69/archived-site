@@ -3,48 +3,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="404: Not Found" description="This page could not be found.">
-  <div class="scanlines"></div>
-  <div class="glitchContainer">
-    <div class="text">
-      <h1 class="title">404</h1>
-      <div class="subtitle">Not Found</div>
-      <div class="textClip">
-        <h1 class="title">404</h1>
-        <div class="subtitle">Not Found</div>
-      </div>
+  <div class="container">
+    <div>
+      <h1>404</h1>
+      <div>Not Found</div>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  @keyframes text-offset {
-    0% {
-      clip-path: polygon(0 110%, 100% 110%, 100% 160%, 0 160%);
-    }
-
-    100% {
-      clip-path: polygon(0 -90%, 100% -90%, 100% -10%, 0 -10%);
-    }
-  }
-
-  @keyframes scanline {
-    0% {
-      transform: translate3d(0, 100vh, 0);
-    }
-
-    50% {
-      transform: translate3d(0, -6px, 0);
-    }
-  }
-
-  @keyframes flicker {
-    0% {
-      opacity: 0.95;
-    }
-
-    100% {
-      opacity: 1;
-    }
+  .container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .glitchContainer {

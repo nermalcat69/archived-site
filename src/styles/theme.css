@@ -3,6 +3,7 @@
 /* @import "@radix-ui/colors/jade-dark.css"; */
 /* @import "@radix-ui/colors/jade-dark-alpha.css"; */
 @import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/ruby.css";
 @import "@radix-ui/colors/gray-alpha.css";
 /* @import "@radix-ui/colors/gray-dark.css"; */
 /* @import "@radix-ui/colors/gray-dark-alpha.css"; */
@@ -33,6 +34,17 @@
 @import "@radix-ui/colors/white-alpha.css";
 @import "@radix-ui/colors/black-alpha.css";
 
+@import "@radix-ui/colors/orange.css";
+@import "@radix-ui/colors/iris.css";
+@import "@radix-ui/colors/teal.css";
+@import "@radix-ui/colors/plum.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/indigo.css";
+@import "@radix-ui/colors/cyan.css";
+@import "@radix-ui/colors/mint.css";
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/brown.css";
+@import "@radix-ui/colors/amber.css";
 :root {
   /* @link https://utopia.fyi/type/calculator?c=320,16,1.125,720,21,1.25,6,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   --step--1: clamp(0.8889rem, 0.88rem + 0.0444vi, 0.9rem);
@@ -80,17 +92,14 @@
 
   /* Shadows */
   --shadow-color: 0deg 0% 0%;
-  --shadow-s:
-    0px 0.6px 0.6px hsl(var(--shadow-color) / 17%),
+  --shadow-s: 0px 0.6px 0.6px hsl(var(--shadow-color) / 17%),
     0px 0.9px 0.9px -1.7px hsl(var(--shadow-color) / 14%),
     0px 2.5px 2.4px -3.5px hsl(var(--shadow-color) / 11%);
-  --shadow-m:
-    0px 0.6px 0.6px hsl(var(--shadow-color) / 12%),
+  --shadow-m: 0px 0.6px 0.6px hsl(var(--shadow-color) / 12%),
     0px 1.6px 1.6px -1.2px hsl(var(--shadow-color) / 10%),
     0px 4.7px 4.6px -2.3px hsl(var(--shadow-color) / 7%),
     0px 12.5px 12.2px -3.5px hsl(var(--shadow-color) / 4%);
-  --shadow-l:
-    0px 0.6px 0.6px hsl(var(--shadow-color) / 17%),
+  --shadow-l: 0px 0.6px 0.6px hsl(var(--shadow-color) / 17%),
     0px 2.6px 2.5px -0.5px hsl(var(--shadow-color) / 16%),
     0px 5.3px 5.2px -1px hsl(var(--shadow-color) / 15%),
     0px 9.7px 9.5px -1.5px hsl(var(--shadow-color) / 13%),

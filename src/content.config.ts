@@ -99,8 +99,6 @@ export const collections = {
         title: z.string(),
         description: z.string(),
         url: z.string().url(),
-        prev: z.string().url(),
-        next: z.string().url(),
         color: z.string(), // Radix color
       }),
   }),

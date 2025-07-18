@@ -1,14 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const paths = [
-  "/",
-  "/writings",
-  "/about",
-  "/now",
-  "/webrings",
-  "/colophon",
-];
+const paths = ["/", "/writings", "/about", "/now", "/webrings", "/colophon"];
 
 test.describe("all pages", () => {
   for (const path of paths) {

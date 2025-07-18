@@ -1,7 +1,7 @@
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import node from '@astrojs/node';
+import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
@@ -23,7 +23,10 @@ export default defineConfig({
     }),
     mdx({
       rehypePlugins: [
-        [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
+        [
+          rehypeExternalLinks,
+          { target: "_blank", rel: ["noopener", "noreferrer"] },
+        ],
       ],
     }),
     sitemap(),
@@ -32,9 +35,12 @@ export default defineConfig({
   adapter: node({ mode: "standalone" }),
   markdown: {
     rehypePlugins: [
-      rehypeHeadingIds, 
+      rehypeHeadingIds,
       [rehypeAutolinkHeadings, autolinkConfig],
-      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]
+      [
+        rehypeExternalLinks,
+        { target: "_blank", rel: ["noopener", "noreferrer"] },
+      ],
     ],
     remarkPlugins: [imgAttr],
   },
