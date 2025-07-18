@@ -1,5 +1,79 @@
 ---
-export const prerender = false;
-
-return Astro.redirect("https://design.arjunaditya.xyz", 308);
+import Center from "../components/Center.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductsSection from "../components/ProductsSection.astro";
+import Rainbow from "../components/Rainbow.astro";
+import Protection from "../components/Protection.astro";
 ---
+
+<BaseLayout
+  title="Arjun Aditya"
+  description="Eva is a designer and web developer based in NYC."
+  includeFooter
+>
+  <Center>
+    <section class="home">
+      <p>Currently iterating this page.</p>
+
+    </section>
+  </Center>
+</BaseLayout>
+
+<style lang="scss">
+  .visuallyhidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+    padding-block-end: var(--space-3xl);
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .work {
+    padding-block: var(--space-3xl) var(--space-xl);
+  }
+
+  .intro {
+    padding-block-start: var(--space-3xl);
+
+    p {
+      font-size: var(--step-4);
+      letter-spacing: var(--letter-spacing-condensed);
+      line-height: var(--line-height-tight);
+    }
+  }
+
+  .other {
+    p {
+      font-size: var(--step-4);
+      letter-spacing: var(--letter-spacing-condensed);
+      line-height: var(--line-height-tight);
+    }
+  }
+
+  [data-sam-button] {
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+</style>
