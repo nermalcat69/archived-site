@@ -1,7 +1,7 @@
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
@@ -32,7 +32,7 @@ export default defineConfig({
     sitemap(),
   ],
   trailingSlash: "never",
-  adapter: node({ mode: "standalone" }),
+  adapter: vercel(),
   markdown: {
     rehypePlugins: [
       rehypeHeadingIds,
