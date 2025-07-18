@@ -424,23 +424,22 @@ const imagesJson = JSON.stringify(images);
     }
 </style>
 
-<script is:inline define:vars={{ images: imagesJson }}>
-    // Parse images from Astro
-    const imageData = JSON.parse(images);
-    
-    let isGridMode = true;
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let isGridMode = true;
 
-    // DOM elements
-    const gallery = document.getElementById('gallery');
-    const viewToggle = document.getElementById('viewToggle');
-    const toggleText = document.getElementById('toggleText');
-    
-    // View toggle functionality
-    viewToggle?.addEventListener('click', () => {
-        isGridMode = !isGridMode;
-        gallery?.classList.toggle('single-column', !isGridMode);
-        if (toggleText) {
-            toggleText.textContent = isGridMode ? 'Single Column' : 'Grid View';
-        }
+        // DOM elements
+        const gallery = document.getElementById('gallery');
+        const viewToggle = document.getElementById('viewToggle');
+        const toggleText = document.getElementById('toggleText');
+        
+        // View toggle functionality
+        viewToggle?.addEventListener('click', () => {
+            isGridMode = !isGridMode;
+            gallery?.classList.toggle('single-column', !isGridMode);
+            if (toggleText) {
+                toggleText.textContent = isGridMode ? 'Single Column' : 'Grid View';
+            }
+        });
     });
 </script>
