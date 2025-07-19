@@ -45,6 +45,8 @@
 @import "@radix-ui/colors/grass.css";
 @import "@radix-ui/colors/brown.css";
 @import "@radix-ui/colors/amber.css";
+@import "tailwindcss";
+
 :root {
   /* @link https://utopia.fyi/type/calculator?c=320,16,1.125,720,21,1.25,6,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   --step--1: clamp(0.8889rem, 0.88rem + 0.0444vi, 0.9rem);
