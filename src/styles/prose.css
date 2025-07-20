@@ -327,13 +327,18 @@
 
 .prose hr {
   border: 0;
+  height: auto;
   margin-block: var(--space-2xl);
   text-align: center;
-
+  background: transparent;
+  
   &::before {
-    content: "\a0⁕ ⁕ ⁕";
+    content: "ʚ ⁕ ⁕ ⁕ ɞ";
+    display: block;
+    color: #a3a3a3;
   }
 }
+
 
 .prose .text-red {
   color: var(--red-9);
