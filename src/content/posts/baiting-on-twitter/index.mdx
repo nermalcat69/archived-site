@@ -1,8 +1,8 @@
 ---
 title: Baiting Tech Twitter (AI Sells)
-description: How I baited 1.2M people from Twitter with just a Reverse Proxy.
-datePublished: 2024-02-10 09:15:00-04:00
-dateModified: 2024-02-15 16:45:00-04:00
+description: How I baited 1.3M people from Twitter with just a Reverse Proxy.
+datePublished: 2025-07-19 10:20:00+05:30
+dateModified: 2025-07-20 11:20:00+05:30
 category: social
 img:
   src: ./baiting.webp
@@ -12,90 +12,209 @@ ogImage: ./baiting.webp
 
 import { Tweet } from "@astro-community/astro-embed-twitter";
 
-
 <div class="w-full flex justify-center">
-  <img src="./baiting.webp" alt="Baiting Tech Twitter" width="70%" class="postImage" />
+  <img src="./baiting.webp" alt="Baiting Tech Twitter" width="90%" class="rounded-lg border border-neutral-300" />
 </div>
+  <p class="text-sm text-center text-neutral-700">*note: i have adhd and i'm not a good at keeping my thoughts in order/flow.</p>
 
-What if we could _visualize_ the **acoustic identity** of our neighborhoods? This social experiment invited residents to collaboratively map the sounds that define their community.
 
-Let's just go back to the day when i got the idea, Raghav Sharma did a tweet saying chatgpt feels good in localhost something like that so i was like 
+This social experiment led me to understand that Humans are flawed and they are very easy
+to fool even if they are experienced beings, people who are funded by one of the biggest
+venture capitalists in the world.
 
-{/* <div class="tweet-container">
+Don't ever feel insecure if you're not getting funded maybe it's about your soft skills
+and mindset more than just your technical skills.
+
+Just because you're not being validated by one single successful person doesn't mean
+you're not valuable. You're supposed to be valuable infront of masses because they
+are your target audience not a single person.
+
+Idolizing and seeking attention of one specific person is the worst thing you can do
+to be successful as per the societal norms. At the end of the day you're meant to compete
+with your previous generation and not with your peers who had a totally different circumstances.
+
+Well enough yapping about the society, let's just dive more into this thing I pulled off.
+
+[Raghav Sharma](https://x.com/Some1UKnow25) did a tweet mentioning that he joined openai and
+he has chatgpt in localhost. 
+
+<div class="tweet-container">
+  <Tweet id="https://x.com/Some1UKnow25/status/1939425405825695873/" />
+  <a href="https://x.com/Some1UKnow25/status/1939425405825695873/" target="_blank" class="text-sm text-neutral-700">open on X</a>
+</div> 
+
+And well he got reach on that tweet and well I can get that reach too. Well i would like to call
+this systematic tweeting as **bandwagon reach** on twitter *(i just made that word up, because
+whenever there's a specific theme trending you can just join the bandwagon and get extra reach)*
+
+Then I was like let's do something similar maybe with [Claude](https://claude.ai), I manually
+copied the frontend of claude and then ran it on localhost, 
+
+<div class="tweet-container">
   <Tweet id="https://x.com/ArjunShips/status/1939728482168430596" />
-</div> */}
-------
-
-Tweet section
+  <a href="https://x.com/ArjunShips/status/1939728482168430596" target="_blank" class="text-sm text-neutral-700">open on X</a>
+</div> 
 
 ------
 
-Before we start this i would like to give special thanks to [Raghav Sharma](https://x.com/Some1UKnow25), [Ayush Singh(shydev)](https://x.com/shydev69) and [Salfiya](https://x.com/traschcannot) for helping me with emotional and reach.
+Some days back when i was running [Gumroad](https://gumroad.com)'s open source code
+locally and it was not using localhost instead it was mapped to `gumroad.dev` so hmmm
+my goofy ahh brain thought I can do something with this mechanism.
 
-Some days back i was running Gumroad's open source code locally and it was not using localhost instead it was mapped to `gumroad.dev`
+On a random morning I was like why not build a reverse proxy backend which maps a
+website to localhost, Then i went on to build a reverse proxy golang backend and
+Next.js Frontend to bait people.
 
-The idea was to create a reverse proxy that would map to localhost and then i would use that to bait the tech twitter.
+Before we start this i would like to give special thanks to [Raghav Sharma](https://x.com/Some1UKnow25),
+[Ayush Singh(shydev)](https://x.com/shydev69) and [Salfiya](https://x.com/traschcannot) for helping
+me with reach and emotional support.
+
+At first people believed that this is so real then someone said it's downloaded html or
+i'm using wget or using /etc/hosts to map all the websites to localhost.
+
+I had to delete the tweet after 1.3M impressions and 1.8k followers because it got
+reported.
+
+<div class="tweet-container">
+  <Tweet id="https://x.com/ArjunShips/status/1943049186154545319/" />
+  <a href="https://x.com/ArjunShips/status/1943049186154545319/" target="_blank" class="text-sm text-neutral-700">open on X</a>
+</div> 
 
 
-
+Example of one of the videos used in the tweet *(i made a thread of 20 videos in
+that tweet tagging those websites)*.
 
 <div class="w-full flex justify-center">
-  <iframe width="560" class="rounded-lg" height="315" src="https://www.youtube.com/embed/fl30gfpmCDE?si=0r2Fcbg9kGWw2AN0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="360" class="rounded-lg" height="200"
+  src="https://www.youtube.com/embed/fl30gfpmCDE?si=0r2Fcbg9kGWw2AN0"
+  title="YouTube video player" frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+  </iframe>
 </div>
+
+<p class="text-sm text-center text-neutral-700">*ps: i use screen studio to record
+videos.</p>
 
 ## Why did this go viral?
 
+Whenever we write a tweet we are supposed to consider that this tweet is going to be seen by a
+lot of people and not everyone has the same knowledge base inside their smoll brain or attention span
+to understand the tweet.
+
+After considering all that info we are supposed to simplify it so much that everyone can comprehend it.
+
+But again complex stuff gets attention if your target audience is geeks or wanna be geeks.
+
+**Reasons for Virality**:
+- **Simplicity** of the tweet
+- **Media Inclusion**(crazy boost when you use image + video)
+- **First 1 Hour**(5 Reposts from big accounts and 30 likes are enough to get the ball
+rolling if your tweet is goated)
+- **Lovable, V0 & Bolt are not enough for them**. *(no one will ever trust a cursor
+alternative as it's too good already)*
+- People need this product which can **replicate beautiful components**
+*(they hate the tag of vibe coded shadcn ui)*.
+- It was just very **unique + very unrealistic** *easy to trigger quotes
+& replies*.
+- **Tagging accounts** help the tweet reach to the followers of the tagged
+account *(personal experience)*
+- **Big accounts liking your tweet** gets the tweet recommended to their
+followers.
+
+Personally, I think there's a huge space in generating animated components
+with perfect color theory and [ux laws](https://lawsofux.com) using gsap and
+framer motion.
 
 
-Reverse Proxy Mapped to Localhost
 
-### The Recording Process
 
-Participants documented:
 
-- **Morning sounds** (6-10 AM)
-- _Afternoon ambiance_ (12-4 PM)
-- **Evening atmosphere** (6-10 PM)
+### The Public Composition
 
-The recordings captured everything from construction noise to children playing, from street musicians to subway rumbles.
+<img src="./baiting-2.webp" alt="Hatred from public" width="90%"
+class="postImage" />
 
-## Creating the Sound Map
+Public composition is almost similar everywhere and if you can milk
+them then you can easily make it.
 
-Using the collected audio and location data, I created an interactive map where visitors could:
+ps: Haters also include people who maybe need a piece of your virality.
 
-1. **Click any location** to hear its acoustic signature
-2. _Compare sounds_ across different times of day
-3. **Discover sonic patterns** unique to each neighborhood
+<img src="./nobody-noticed.jpg" alt="Hatred from public" width="50%"
+class="pt-10" />
 
-### Unexpected Discoveries
+People move on really fast but it takes time, fabricating and changing your public
+persona isn't that hard even if you're the worst person on this planet.
 
-The project revealed fascinating _acoustic territories_:
+## Who Noticed
 
-- **Coffee shops** created consistent morning soundscapes
-- _Construction sites_ moved predictably through the area
-- **Evening sounds** varied dramatically by block
-- _Weekend patterns_ differed significantly from weekdays
+- CTOs dm'd me to help them to improve their product.
+- People offered me money to sell access to the tool.
+- Two Founders tried to hire me.
+- Designers & Web Agencies.
 
-## Community Impact
+Considering I want to stay independent, I had to ditch all the offers.
 
-The sound map became a **living document** of neighborhood character. Participants reported:
+I should mention that there's still room to serve customers with AI wrappers.
+AI products sell well, and despite high churn rates, you're veryyy likely to
+generate at least thousand dollars in revenue.
 
-- Increased _awareness of their acoustic environment_
-- **New appreciation** for everyday sounds
-- _Stronger sense of place_ and community identity
-- **Desire to preserve** certain neighborhood sounds
+
+ALSO WHY TF IS THERE NO GOOD CUSTOMER SERVICE BY AI WRAPPERS EXCEPT CURSOR?
 
 ## Technical Implementation
 
-The project used:
+#### API Integration
+The frontend makes HTTP requests to `http://localhost:8080/api/create-proxy?url={target}` which returns JSON containing
+the assigned port and localhost URL.
 
-- Custom recording app with GPS tagging
-- Audio processing for noise reduction
-- Interactive web map with playback controls
-- _Time-based filtering_ for different listening experiences
+The Go server handles these requests by spawning new proxy instances and returning
+the connection details for immediate use.
 
-## Reflection
+#### Golang Backend
+The backend uses `httputil.NewSingleHostReverseProxy(targetURL)` to create dedicated reverse proxies for each target site.
+Each proxy runs in its own [goroutine](https://go.dev/tour/concurrency/1) on auto-allocated ports starting from 3001. It
+selectively rewrites URLs based on Content-Type headers - only HTML content (`text/html`) undergoes URL transformation while other
+content types (CSS, JS, images, JSON) pass through unchanged.
 
-This experiment transformed how participants _listened to their environment_. By making the invisible visible, we created a new form of **community documentation**. The sound map became not just an artistic project, but a tool for _urban planning_ and **neighborhood advocacy**.
+The proxy performs bidirectional header manipulation by setting `r.Host = targetURL.Host` for outbound requests and rewriting
+`Location` headers in responses for proper redirect handling. All original headers are preserved by default, including
+Content-Type, Cache-Control, and Set-Cookie headers. The response modification pipeline reads HTML content, transforms
+external links to localhost addresses, and updates Content-Length accordingly.
 
-The most powerful outcome was hearing participants say: _"I never noticed how many birds live here until I started really listening."_
+CORS headers are automatically enabled to allow frontend communication.
+
+#### Data Flow
+User submits URL → API call creates proxy → Go server spawns reverse proxy on available port → Returns localhost URL → User accesses
+proxied content through localhost while proxy fetches from original site behind the scenes.
+
+The architecture maintains thread-safety through mutex locks and provides real-time proxy creation with instant feedback.
+
+ps: this won't bypass the auth because the origin is not localhost.
+
+I'll open source the code if you guys are interested, but for that help this tweet reached 200 likes first.
+
+
+## The End Results
+
+Got shadowbanned after a report after getting 1.8k Followers & 1.3M impressions.
+
+Well I got to know that you can just deactivate your account for 72 hours and then
+reactivate it and you're good to go but most likely you'll have to delete your tweet
++ request for a review *you'll most likely get a notification for that*.
+
+
+Feel free to check my other [Viral Tweets](/posts/viral-tweets) too.
+
+Also you can always reach out to me on [X](https://x.com/ArjunShips) or at [meow@nermalcat69.dev](mailto:meow@nermalcat69.dev).
+
+----
+
+ps: if i made any mistake you can @ArjunShips me on X.
+
+ps: images with drawings are from pinterest *not sure who's the artist* but you can
+always reverse image search using google image search, yandex image or even tineye
+(tineye is mid tho).
+
+Also just a random tip whenever you're trying to find info don't forget to check exif
+data but nowadays a lot of platforms just delete that data.

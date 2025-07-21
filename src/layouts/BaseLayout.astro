@@ -68,8 +68,11 @@ const viewTransition = {
 >
   <script is:inline src="/scripts/preloadTheme.js"></script>
   <script async src="https://platform.twitter.com/widgets.js"></script>
+  <script>
+    import { inject } from "@vercel/analytics";
+    inject();
+  </script>
   <script async src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
-
   <Header />
   <main
     class:list={["main", { padTop }, { padBottom }]}
