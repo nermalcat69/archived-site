@@ -64,9 +64,13 @@ const initial = Math.floor(Math.random() * shuffled.length);
       trackImg.alt = tracks[idx].title;
     }
     function playTrack() {
-      audio.play();
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = '';
+      audio.play().then(() => {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = '';
+      }).catch(() => {
+        playIcon.style.display = '';
+        pauseIcon.style.display = 'none';
+      });
     }
     function pauseTrack() {
       audio.pause();
@@ -76,6 +80,14 @@ const initial = Math.floor(Math.random() * shuffled.length);
     playBtn.onclick = () => {
       if (audio.paused) playTrack();
       else pauseTrack();
+    };
+    audio.onplay = () => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = '';
+    };
+    audio.onpause = () => {
+      playIcon.style.display = '';
+      pauseIcon.style.display = 'none';
     };
     nextBtn.onclick = () => {
       current = (current + 1) % tracks.length;
