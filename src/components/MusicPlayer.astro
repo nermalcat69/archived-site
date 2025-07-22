@@ -1,0 +1,177 @@
+---
+const tracks = [
+{ src: '/music/idea-10.mp3', img: '/music/idea-10.webp', title: 'Banjo', link: 'https://youtu.be/5OIeIaAhQOg?si=GmD9OsLe7afXKaek' },
+  { src: '/music/idea-22.mp3', img: '/music/idea-22.webp', title: 'Bell', link: 'https://youtu.be/8Da7RgPXCmU?si=ugLJiqPdEkQemOt2' },
+  { src: '/music/namesake.mp3', img: '/music/namesake.webp', title: 'Click', link: 'https://www.youtube.com/watch?v=yHGmkvOr7u8' },
+  { src: '/music/resonance.mp3', img: '/music/resonance.webp', title: 'Resonance', link: 'https://youtu.be/8GW6sLrK40k?si=uAfu6WO4Cl4PClEu' },
+  ];
+const shuffled = tracks.slice().sort(() => Math.random() - 0.5);
+const initial = Math.floor(Math.random() * shuffled.length);
+---
+
+<div id="music-player" class="music-player hidden md:block">
+  <a href={shuffled[initial].link} target="_blank" class="logo">
+    <img id="track-img" class="track-img" src={shuffled[initial].img} alt={shuffled[initial].title} />
+  </a>
+  <div class="divider"></div>
+
+  <button id="prev" class="icon-btn active:scale-110">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M16 18L10 12L16 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button id="play" class="icon-btn active:scale-110">
+    <svg id="play-icon" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg>
+    <svg id="pause-icon" width="24" height="24" viewBox="0 0 24 24" style="display:none"><rect x="6" y="5" width="4" height="14" fill="#fff"/><rect x="14" y="5" width="4" height="14" fill="#fff"/></svg>
+  </button>
+  <button id="next" class="icon-btn">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+<audio id="audio" preload="none"></audio>
+
+<script type="module">
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  const tracks = shuffle([
+    { src: '/music/idea-10.mp3', img: '/music/idea-10.webp', title: 'Banjo', link: 'https://youtu.be/5OIeIaAhQOg?si=GmD9OsLe7afXKaek' },
+    { src: '/music/idea-22.mp3', img: '/music/idea-22.webp', title: 'Bell', link: 'https://youtu.be/8Da7RgPXCmU?si=ugLJiqPdEkQemOt2' },
+    { src: '/music/namesake.mp3', img: '/music/namesake.webp', title: 'Click', link: 'https://www.youtube.com/watch?v=yHGmkvOr7u8' },
+    { src: '/music/resonance.mp3', img: '/music/resonance.webp', title: 'Resonance', link: 'https://youtu.be/8GW6sLrK40k?si=uAfu6WO4Cl4PClEu' },
+  ]);
+  let current = Math.floor(Math.random() * tracks.length);
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(() => {
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('play');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+    const trackImg = document.getElementById('track-img');
+    if (!audio || !playBtn || !playIcon || !pauseIcon || !nextBtn || !prevBtn || !trackImg) return;
+    audio.loop = false;
+    function loadTrack(idx) {
+      audio.src = tracks[idx].src;
+      audio.load();
+      trackImg.src = tracks[idx].img;
+      trackImg.alt = tracks[idx].title;
+    }
+    function playTrack() {
+      audio.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = '';
+    }
+    function pauseTrack() {
+      audio.pause();
+      playIcon.style.display = '';
+      pauseIcon.style.display = 'none';
+    }
+    playBtn.onclick = () => {
+      if (audio.paused) playTrack();
+      else pauseTrack();
+    };
+    nextBtn.onclick = () => {
+      current = (current + 1) % tracks.length;
+      loadTrack(current);
+      playTrack();
+    };
+    prevBtn.onclick = () => {
+      current = (current - 1 + tracks.length) % tracks.length;
+      loadTrack(current);
+      playTrack();
+    };
+    loadTrack(current);
+    audio.onended = () => {
+      playIcon.style.display = '';
+      pauseIcon.style.display = 'none';
+    };
+  });
+</script>
+
+<style>
+.music-player {
+  position: fixed;
+  top: 5rem;
+  right: 3%;
+  height: 2.5rem;
+  width: 11.5rem;
+  background: linear-gradient(90deg, #252525 80%, #090909 100%);
+  border-radius: 2rem;
+  box-shadow: 0 2px 16px #0002;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  z-index: 10;
+  border: 1px solid #222;
+  transition: all 0.2s ease-in-out;
+}
+
+.music-player:hover {
+  scale: 105%;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  position: relative;
+}
+
+.track-img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  outline: none;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.icon-btn:hover {
+  background: #2a2d34;
+}
+
+.icon-btn:active {
+  scale: 1.1;
+}
+
+.divider {
+  width: 1px;
+  height: 1.5rem;
+  background: #333;
+  margin: 0 0.5rem;
+}
+@media (max-width: 600px) {
+  .music-player {
+    display: none;
+    width: 98vw;
+    min-width: 0;
+    left: 1vw;
+    transform: none;
+    bottom: 1rem;
+    padding: 0 0.25rem;
+  }
+}
+</style> 
