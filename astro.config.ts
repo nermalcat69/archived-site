@@ -1,6 +1,7 @@
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
+import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
@@ -45,6 +46,7 @@ export default defineConfig({
     remarkPlugins: [imgAttr],
   },
   vite: {
+    plugins: [tailwindcss()],
     optimizeDeps: {
       exclude: ["fsevents"],
     },

@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 html {
   font-size: 100%;
   height: 100%;
@@ -131,5 +133,18 @@ a {
 .postImage {
   border-radius: 20px;
   margin-top: 20px;
+  padding-bottom: 20px;
   border: 1px solid var(--gray-8);
+}
+
+.caption {
+  font-size: var(--step--1);
+  color: #444;
+}
+
+.svg-zoom-wrapper:hover {
+  cursor: none;
+}
+.zoom-lens {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
