@@ -9,6 +9,7 @@ import expressiveCode from "astro-expressive-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import imgAttr from "remark-imgattr";
+// import astroLlmsTxt from '@4hse/astro-llms-txt';
 import { autolinkConfig } from "./plugins/rehype-autolink-config";
 
 export default defineConfig({
@@ -52,11 +53,10 @@ export default defineConfig({
     },
     assetsInclude: ["**/*.heic", "**/*.HEIC"],
   },
-  redirects: {
-    "/projects": "/",
-    "/projects/genderswap": "/posts/genderswap",
-    "/projects/boundaries-map": "/posts/boundaries-map",
-    "/projects/commonplace": "/posts/commonplace",
-    "/friends": "/webrings",
-  },
+  // redirects: {
+  //   "/projects": "/",
+
+  //   "/projects/commonplace": "/posts/commonplace",
+  //   "/friends": "/webrings",
+  // },
 });

@@ -69,18 +69,6 @@ import Protection from "../components/Protection.astro";
   setupSticker();
 
   document.addEventListener("astro:after-swap", () => setupSticker());
-
-  document.addEventListener("astro:page-load", () => {
-    document
-      .querySelector("[data-sam-button]")
-      ?.addEventListener("click", () => {
-        Fathom.trackEvent("stickers: add sam");
-      });
-
-    document.querySelector("[data-sam-shoo]")?.addEventListener("click", () => {
-      Fathom.trackEvent("stickers: shoo sam");
-    });
-  });
 </script>
 
 <style lang="scss">

@@ -263,8 +263,6 @@ export const SubscribeForm = () => {
     setCurrentEmote(nextEmote);
     setCurrentText("");
     setCurrentRemarkType(null);
-
-    Fathom.trackEvent("subscribe: click stamp");
   };
 
   return (

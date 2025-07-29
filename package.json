@@ -20,6 +20,7 @@
     "check-links": "lychee --config .lychee.toml ."
   },
   "dependencies": {
+    "@4hse/astro-llms-txt": "^1.0.4",
     "@astro-community/astro-embed-twitter": "^0.5.8",
     "@astrojs/check": "^0.9.4",
     "@astrojs/db": "0.14.14",

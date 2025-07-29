@@ -167,7 +167,6 @@ export const NotecardComposer = () => {
     ) {
       setContentValue(contentValue);
       setShowWarning(true);
-      Fathom.trackEvent("guestbook: show textarea warning");
     } else {
       setContentValue(e.target.value);
       if (showWarning) setShowWarning(false);
@@ -176,20 +175,16 @@ export const NotecardComposer = () => {
 
   const handleNextTheme = () => {
     setSelectedTheme(nextThemeIndex);
-    Fathom.trackEvent("guestbook: next theme");
   };
 
   const handlePrevTheme = () => {
     setSelectedTheme(prevThemeIndex);
-    Fathom.trackEvent("guestbook: prev theme");
   };
 
-  const handleSubmit = () => {
-    Fathom.trackEvent("guestbook: submit");
-  };
+
 
   return (
-    <form method="POST" onSubmit={handleSubmit}>
+    <form method="POST">
       <div className={styles.composer}>
         <img
           className={styles.background}
