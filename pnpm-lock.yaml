@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@4hse/astro-llms-txt':
-        specifier: ^1.0.4
-        version: 1.0.4(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0))
       '@astro-community/astro-embed-twitter':
         specifier: ^0.5.8
         version: 0.5.8(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0))
@@ -68,6 +65,9 @@ importers:
       astro-font:
         specifier: ^1.1.0
         version: 1.1.0
+      astro-llms-generate:
+        specifier: ^1.3.3
+        version: 1.3.3(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0))
       astro-loading-indicator:
         specifier: ^0.7.0
         version: 0.7.0(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0))
@@ -176,12 +176,6 @@ importers:
         version: 5.8.3
 
 packages:
-
-  '@4hse/astro-llms-txt@1.0.4':
-    resolution: {integrity: sha512-ujD9iu95SMxYau42rRRFrPDIgjhThUpm786g835j1pAJ0vmFV0FV3dIDYtaJSxsopUlRChUqfjwPv+YV2amdXw==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
-    peerDependencies:
-      astro: ^5.1.6
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -1428,9 +1422,6 @@ packages:
   '@types/babel__traverse@7.20.7':
     resolution: {integrity: sha512-dkO5fhS7+/oos4ciWxyEyjWe48zmG6wbCheo/G2ZnHx4fs3EU6YC6UM8rk56gAjNJ9P3MTH2jo5jb92/K6wbng==}
 
-  '@types/braces@3.0.5':
-    resolution: {integrity: sha512-SQFof9H+LXeWNz8wDe7oN5zu7ket0qwMu5vZubW4GCJ8Kkeh6nBWUz87+KTz/G3Kqsrp0j/W253XJb3KMEeg3w==}
-
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
@@ -1457,9 +1448,6 @@ packages:
 
   '@types/mdx@2.0.13':
     resolution: {integrity: sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw==}
-
-  '@types/micromatch@4.0.9':
-    resolution: {integrity: sha512-7V+8ncr22h4UoYRLnLXSpTxjQrNUXtWHGeMPRJt1nULXI57G9bIcpyrHlmrQ7QK24EyyuXvYcSSWAM8GA9nqCg==}
 
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
@@ -1748,6 +1736,12 @@ packages:
 
   astro-font@1.1.0:
     resolution: {integrity: sha512-hj1A0MkaJTeaArBpf1m9s4Nxu1Bn9h0QiEPeR9Dfjle25pT4CH4higzuadWzCRSvhGO2SzbM11YwZEF+cmLDxg==}
+
+  astro-llms-generate@1.3.3:
+    resolution: {integrity: sha512-BBJyJ8zGfi3gDltHtnnR2X70CiwKNxmu3650KpZiEnFnvOaH+BVNJAf+xz7bEDHBniQGrRvhdrvZHEjC5KZR2A==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      astro: ^5.1.6
 
   astro-loading-indicator@0.7.0:
     resolution: {integrity: sha512-oNSUYbHq8Aaol0zcVuBzGz+qrqKsviOvKl1xaaKo3DLkEef7HCzHQAgTgWv4lB1iYFWa5GaieQvlxBO4KjzKZg==}
@@ -5117,29 +5111,6 @@ packages:
 
 snapshots:
 
-  '@4hse/astro-llms-txt@1.0.4(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0))':
-    dependencies:
-      '@astrojs/mdx': 4.3.0(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0))
-      '@types/hast': 3.0.4
-      '@types/jsdom': 21.1.7
-      '@types/micromatch': 4.0.9
-      astro: 5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0)
-      github-slugger: 2.0.0
-      hast-util-select: 6.0.4
-      jsdom: 26.1.0
-      micromatch: 4.0.8
-      rehype-parse: 9.0.1
-      rehype-remark: 10.0.1
-      remark-gfm: 4.0.1
-      remark-stringify: 11.0.0
-      unified: 11.0.5
-      unist-util-remove: 4.0.0
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
-
   '@ampproject/remapping@2.3.0':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
@@ -6473,8 +6444,6 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.0
 
-  '@types/braces@3.0.5': {}
-
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 2.1.0
@@ -6506,10 +6475,6 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/mdx@2.0.13': {}
-
-  '@types/micromatch@4.0.9':
-    dependencies:
-      '@types/braces': 3.0.5
 
   '@types/minimist@1.2.5': {}
 
@@ -6846,6 +6811,27 @@ snapshots:
       rehype-expressive-code: 0.41.3
 
   astro-font@1.1.0: {}
+
+  astro-llms-generate@1.3.3(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0)):
+    dependencies:
+      '@types/hast': 3.0.4
+      '@types/jsdom': 21.1.7
+      '@types/unist': 3.0.3
+      astro: 5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0)
+      github-slugger: 2.0.0
+      hast-util-select: 6.0.4
+      jsdom: 26.1.0
+      rehype-parse: 9.0.1
+      rehype-remark: 10.0.1
+      remark-gfm: 4.0.1
+      remark-stringify: 11.0.0
+      unified: 11.0.5
+      unist-util-remove: 4.0.0
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
 
   astro-loading-indicator@0.7.0(astro@5.11.0(@netlify/blobs@8.2.0)(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.44.2)(sass@1.89.2)(typescript@5.8.3)(yaml@2.6.0)):
     dependencies:

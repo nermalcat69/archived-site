@@ -9,13 +9,14 @@ import expressiveCode from "astro-expressive-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import imgAttr from "remark-imgattr";
-// import astroLlmsTxt from '@4hse/astro-llms-txt';
 import { autolinkConfig } from "./plugins/rehype-autolink-config";
+import astroLLMsGenerator from 'astro-llms-generate';
 
 export default defineConfig({
   site: "https://arjunaditya.xyz",
   prefetch: true,
   integrations: [
+    astroLLMsGenerator(),
     react(),
     expressiveCode({
       styleOverrides: {
@@ -31,7 +32,12 @@ export default defineConfig({
         ],
       ],
     }),
-    sitemap(),
+    sitemap({
+      customPages: [
+        "https://arjunaditya.xyz/llms.txt",
+        "https://arjunaditya.xyz/llms-full.txt",
+        "https://arjunaditya.xyz/llms-small.txt"],
+      }),
   ],
   trailingSlash: "never",
   adapter: vercel(),
