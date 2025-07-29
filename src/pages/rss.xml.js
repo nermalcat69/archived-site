@@ -9,8 +9,8 @@ export async function GET(context) {
   const posts = await getCollection("posts");
 
   return await rss({
-    title: "Eva Town",
-    description: "Dispatches from the world wide web.",
+    title: "Arjun Aditya's Blog",
+    description: "Thoughts on product building, design, tech, and life from an indie hacker.",
     site: context.site,
     trailingSlash: false,
     stylesheet: "/rss/pretty-feed-v3.xsl",

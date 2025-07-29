@@ -26,6 +26,7 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#FCFCFC" />
     <meta
@@ -91,7 +92,7 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Dispatches from Eva Town"
+      title="Arjun Aditya's Blog"
       href={new URL("rss.xml", Astro.site)}
     />
     <meta name="description" content={description} />
@@ -107,7 +108,7 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
     />
     <meta
       property="og:image:alt"
-      content={ogAlt ?? "Eva designs and builds things for the web."}
+      content={ogAlt ?? "Arjun Aditya builds products and designs for the web."}
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -116,11 +117,52 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage ?? `${Astro.url.origin}/og/default.png`} />
-    <meta name="twitter:image:alt" content={ogAlt ?? "Eva designs and builds things for the web."} />
+    <meta name="twitter:image:alt" content={ogAlt ?? "Arjun Aditya builds products and designs for the web."} />
     <meta name="twitter:site" content="@ArjunShips" />
     <meta name="twitter:creator" content="@ArjunShips" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://arjunaditya.xyz/#person",
+            "name": "Arjun Aditya",
+            "url": "https://arjunaditya.xyz",
+            "image": "https://arjunaditya.xyz/og/default.png",
+            "description": "Product builder, designer, and developer who loves tech, design, and web scraping. Currently living in Himachal, building micro products and helping non-technical people interact with the internet better.",
+            "jobTitle": "Product Builder & Designer",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Independent"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "Himachal Pradesh",
+              "addressCountry": "India"
+            },
+            "sameAs": [
+              "https://twitter.com/ArjunShips",
+              "https://instagram.com/nermalcat69",
+              "https://discord.gg/nermalcat69"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://arjunaditya.xyz/#website",
+            "url": "https://arjunaditya.xyz",
+            "name": "Arjun Aditya",
+            "description": "Product builder, designer, and developer who loves tech, design, and web scraping.",
+            "publisher": {
+              "@id": "https://arjunaditya.xyz/#person"
+            },
+            "inLanguage": "en-US"
+          }
+        ]
+      }
+    </script>
     <title>{pageTitle}</title>
     <ClientRouter />
     <LoadingIndicator color="var(--blue-9)" height="3px" threshold={600} />
