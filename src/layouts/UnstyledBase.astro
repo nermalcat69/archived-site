@@ -131,7 +131,15 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
             "@id": "https://arjunaditya.xyz/#person",
             "name": "Arjun Aditya",
             "url": "https://arjunaditya.xyz",
-            "image": "https://arjunaditya.xyz/og/default.png",
+            "image": {
+              "@type": "ImageObject",
+              "@id": "https://arjunaditya.xyz/arjun-aditya-in-himachal.webp",
+              "url": "https://arjunaditya.xyz/og/default.png",
+              "contentUrl": "https://arjunaditya.xyz/og/default.png",
+              "width": 1200,
+              "height": 630,
+              "caption": "Arjun Aditya - Product Builder & Designer"
+            },
             "description": "Product builder, designer, and developer who loves tech, design, and web scraping. Currently living in Himachal, building micro products and helping non-technical people interact with the internet better.",
             "jobTitle": "Product Builder & Designer",
             "worksFor": {
@@ -158,7 +166,10 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
             "publisher": {
               "@id": "https://arjunaditya.xyz/#person"
             },
-            "inLanguage": "en-US"
+            "inLanguage": "en-US",
+            "image": {
+              "@id": "https://arjunaditya.xyz/#personimage"
+            }
           }
         ]
       }
@@ -166,10 +177,6 @@ const pageTitle = Astro.url.pathname === "/" ? title : `${title} · Arjun Aditya
     <title>{pageTitle}</title>
     <ClientRouter />
     <LoadingIndicator color="var(--blue-9)" height="3px" threshold={600} />
-    <script>
-      import * as Fathom from "fathom-client";
-      Fathom.load("WKFTECUZ");
-    </script>
     <script>
       import { inject } from "@vercel/analytics";
       inject();

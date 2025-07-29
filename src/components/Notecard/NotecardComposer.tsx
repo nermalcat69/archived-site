@@ -1,4 +1,3 @@
-import * as Fathom from "fathom-client";
 import { type ChangeEvent, useEffect, useState } from "react";
 
 import styles from "./notecard.module.scss";

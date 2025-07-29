@@ -50,20 +50,6 @@ const navigation = [
   </Center>
 </header>
 
-<script>
-  import * as Fathom from "fathom-client";
-
-
-  document.addEventListener("astro:page-load", () => {
-    document.querySelectorAll("[data-fathom='nav-link']").forEach((navlink) => {
-      navlink.addEventListener("click", () => {
-        const url = navlink.getAttribute("href");
-        Fathom.trackEvent(`nav: click link (${url})`);
-      });
-    });
-  });
-</script>
-
 <style lang="scss">
   header {
     width: 100%;
