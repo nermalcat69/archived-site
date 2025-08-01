@@ -11,6 +11,8 @@ stats.json
 # macOS
 .DS_Store
 
+ghost
+
 # Build output
 dist/
 *.tsbuildinfo
