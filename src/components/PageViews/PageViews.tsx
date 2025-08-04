@@ -56,8 +56,7 @@ export function PageViews({ path, className = '' }: PageViewsProps) {
     return (
       <div className={`page-views ${className}`}>
         <span className="views-count">
-          <span className="views-icon">👁️</span>
-          <span className="views-text">Loading...</span>
+          <span className="views-text w-20 h-5 bg-neutral-50"></span>
         </span>
       </div>
     );
@@ -70,7 +69,6 @@ export function PageViews({ path, className = '' }: PageViewsProps) {
   return (
     <div className={`page-views ${className}`}>
       <span className="views-count">
-        <span className="views-icon">👁️</span>
         <span className="views-text">
           {views.toLocaleString()} {views === 1 ? 'view' : 'views'}
         </span>
