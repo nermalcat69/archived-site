@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { incrementPageView, getPageViews } from '../../../lib/redis';
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ params, request }) => {
   try {
     const path = params.path || '';
