@@ -1,0 +1,39 @@
+.page-views {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--step--1);
+  color: var(--gray-11);
+  margin-top: 0.5rem;
+}
+
+.views-count {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: var(--font-weight-normal);
+}
+
+.views-icon {
+  font-size: 0.875em;
+  opacity: 0.8;
+}
+
+.views-text {
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: 0.01em;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .page-views {
+    color: var(--gray-10);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-views {
+    font-size: var(--step--2);
+  }
+}
