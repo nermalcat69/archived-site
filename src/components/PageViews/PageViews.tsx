@@ -56,7 +56,7 @@ export function PageViews({ path, className = '' }: PageViewsProps) {
     return (
       <div className={`page-views ${className}`}>
         <span className="views-count">
-          <span className="views-text w-20 h-5 bg-neutral-50"></span>
+          <span className="views-text w-20 h-5 bg-neutral-50">0 views</span>
         </span>
       </div>
     );
