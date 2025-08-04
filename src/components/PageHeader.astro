@@ -4,6 +4,7 @@ import Center from "./Center.astro";
 import { Icon } from "./Icon/Icon";
 import Picture from "./Picture.astro";
 import { RelativeDate } from "./RelativeDate/RelativeDate";
+import { PageViews } from "../components/PageViews/PageViews";
 
 interface Props {
   title: string;
@@ -47,9 +48,11 @@ const isModifiedSameDay = dayjs(datePublished).isSame(dateModified, "day");
               </span>
             )}
           </span>
+            <PageViews path={Astro.url.pathname} client:load />
         </div>
       )
     }
+    <PageViews path={Astro.url.pathname} client:load />
   </Center>
 </header>
 
@@ -81,6 +84,7 @@ const isModifiedSameDay = dayjs(datePublished).isSame(dateModified, "day");
 
   .date {
     display: flex;
+    flex-direction: row;
     align-items: baseline;
     column-gap: var(--space-2xs);
     margin-block-start: var(--space-m);
