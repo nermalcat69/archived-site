@@ -1,9 +1,8 @@
-import { useStore } from "@nanostores/react";
 import classNames from "classnames";
 import { AnimatePresence } from "motion/react";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { clearStickers, numStickers } from "../../stores/sticker";
+import { clearStickers, numStickers, useStore } from "../../stores/sticker";
 import { STICKER_VARIANTS, Sticker, type StickerProps } from "./Sticker";
 
 export const Stickers = () => {

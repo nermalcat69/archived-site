@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 interface SvgZoomProps {
   src: string;
@@ -17,6 +17,11 @@ export default function SvgZoom({
 }: SvgZoomProps) {
   const imgRef = useRef<HTMLImageElement>(null);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const img = imgRef.current;
@@ -37,6 +42,26 @@ export default function SvgZoom({
       img.style.transformOrigin = 'center center';
     }
   };
+
+  // Don't render until mounted to avoid hydration issues
+  if (!isMounted) {
+    return (
+      <div
+        style={{
+          overflow: 'hidden',
+          height: `${containerHeight}px`,
+          borderRadius: '8px',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#f3f4f6',
+        }}
+      >
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div

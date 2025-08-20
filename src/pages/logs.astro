@@ -11,6 +11,37 @@ events.sort((a, b) => {
 
 const title = "Now";
 const description = "How's Arjun's life going?";
+
+// Function to truncate text to approximately 60 words while preserving HTML tags
+function truncateToWords(text: string, maxWords: number = 60): { truncated: string; hasMore: boolean } {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= maxWords) {
+    return { truncated: text, hasMore: false };
+  }
+  
+  // Take the first maxWords words
+  const truncatedWords = words.slice(0, maxWords);
+  let truncated = truncatedWords.join(' ');
+  
+  // Check if we cut off in the middle of an HTML tag
+  const lastTagMatch = truncated.match(/<[^>]*$/);
+  if (lastTagMatch) {
+    // Remove the incomplete tag
+    truncated = truncated.replace(/<[^>]*$/, '');
+  }
+  
+  // Check if we cut off in the middle of a link text
+  const lastLinkMatch = truncated.match(/\[([^\]]*)$/);
+  if (lastLinkMatch) {
+    // Remove the incomplete link
+    truncated = truncated.replace(/\[([^\]]*)$/, '');
+  }
+  
+  // Add ellipsis
+  truncated += '...';
+  
+  return { truncated, hasMore: true };
+}
 ---
 
 <ProseLayout title={title} description={description}>
@@ -18,6 +49,9 @@ const description = "How's Arjun's life going?";
     {
       events.map(async (event) => {
         const { Content } = await render(event);
+        // Handle the case where event.body might be undefined
+        const contentText = typeof event.body === 'string' ? event.body : '';
+        const { truncated, hasMore } = truncateToWords(contentText);
 
         return (
           <li class="event">
@@ -27,7 +61,20 @@ const description = "How's Arjun's life going?";
             </span>
             <div class="line" aria-hidden />
             <div class="content">
-              <Content />
+              <div class="content-preview" data-event-id={event.id}>
+                <div class="preview-text" set:html={truncated} />
+                {hasMore && (
+                  <button class="read-more-btn" data-event-id={event.id}>
+                    Read more
+                  </button>
+                )}
+              </div>
+              <div class="content-full" data-event-id={event.id} style="display: none;">
+                <Content />
+                <button class="read-less-btn" data-event-id={event.id}>
+                  Read less
+                </button>
+              </div>
             </div>
           </li>
         );
@@ -45,6 +92,46 @@ const description = "How's Arjun's life going?";
       </div>
     </li>
   </ul>
+
+  <script>
+    // Add event listeners when the DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click handlers for read more buttons
+      document.querySelectorAll('.read-more-btn').forEach(button => {
+        button.addEventListener('click', function(this: HTMLButtonElement) {
+          const eventId = this.getAttribute('data-event-id');
+          if (eventId) {
+            toggleContent(eventId);
+          }
+        });
+      });
+
+      // Add click handlers for read less buttons
+      document.querySelectorAll('.read-less-btn').forEach(button => {
+        button.addEventListener('click', function(this: HTMLButtonElement) {
+          const eventId = this.getAttribute('data-event-id');
+          if (eventId) {
+            toggleContent(eventId);
+          }
+        });
+      });
+    });
+
+    function toggleContent(eventId: string) {
+      const preview = document.querySelector(`[data-event-id="${eventId}"].content-preview`);
+      const full = document.querySelector(`[data-event-id="${eventId}"].content-full`);
+      
+      if (preview && full && preview instanceof HTMLElement && full instanceof HTMLElement) {
+        if (preview.style.display === 'none') {
+          preview.style.display = 'block';
+          full.style.display = 'none';
+        } else {
+          preview.style.display = 'none';
+          full.style.display = 'block';
+        }
+      }
+    }
+  </script>
 
   <style lang="scss">
     .events {
@@ -94,6 +181,30 @@ const description = "How's Arjun's life going?";
 
     .content {
       grid-area: content;
+    }
+
+    .content-preview, .content-full {
+      margin-bottom: var(--space-m);
+    }
+
+    .preview-text {
+      margin-bottom: var(--space-s);
+    }
+
+    .read-more-btn, .read-less-btn {
+      background: none;
+      border: 1px solid var(--gray-7);
+      border-radius: var(--radius-s);
+      padding: 0.25em var(--space-xs);
+      color: var(--gray-11);
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--gray-3);
+        border-color: var(--gray-8);
+      }
     }
 
     .event:not(:last-child) .content {
