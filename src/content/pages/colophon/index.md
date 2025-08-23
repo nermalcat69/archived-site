@@ -11,8 +11,8 @@ This website is a forked version of [eva.town](https://eva.town) - [source code]
 
 ---
 
-On the flip side, if you're doing something cool and want to connect with me feel free to [dm me](https://x.com/arjunships)
+On the flip side, if you're doing something cool and want to connect with me feel free to [dm me](https://x.com/ArjunAditya_)
 
 ## Notice an issue?
 
-If you spot a typo, encounter a broken feature, or have a recommendation for an improvement, [dm me on X](https://x.com/ArjunShips).
+If you spot a typo, encounter a broken feature, or have a recommendation for an improvement, [dm me on X](https://x.com/ArjunAditya_).
