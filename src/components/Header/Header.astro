@@ -32,7 +32,12 @@ const navigation = [
 <header>
   <Center>
     <nav id="nav">
-      <Logo />
+            <a
+              href="/"
+              class={topLevelPath === "" ? "active" : ""}
+            >
+Home
+          </a>
       <div class="links">
         {
           navigation.map((item) => (
@@ -66,6 +71,32 @@ const navigation = [
     align-items: center;
     justify-content: space-between;
     gap: var(--space-s);
+
+    > a {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      text-decoration: none;
+      line-height: 1;
+      color: var(--gray-12);
+      padding: var(--space-xs) var(--space-s);
+      border-radius: var(--radius-full);
+      transition: font-weight 0.2s ease-in-out;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          font-weight: var(--font-weight-bold);
+        }
+
+        &:active {
+          transition: none;
+        }
+      }
+
+      &.active {
+        font-weight: var(--font-weight-bold);
+      }
+    }
   }
 
   .links {
