@@ -15,36 +15,25 @@ import Protection from "../components/Protection.astro";
     <section class="home" role="main" itemscope itemtype="https://schema.org/Person">
       <h1 class="visuallyhidden">Arjun Aditya is a Founder of Coldran and designs for the web.</h1>
       <div class="intro" data-content="primary">
-                
-                <p>
-                <strong><a href="/about" class="inline-link" itemprop="name">Arjun Aditya</a></strong> is
-          building <a href="https://coldran.com" target="_blank">Coldran</a>.
+        <p>
+        <a href="/about" itemprop="name">Arjun Aditya</a> is
+          building <a href="https://coldran.com" target="_blank">Coldran</a>. Helping Teams work better with Customers.
           <br/>
-          <!-- <span class="text-sm">Invest in Me & Coldran</span></p> -->
-      </div>
-      <!-- <p>
-        <br />
-        He likes Software, Design, and Scraping 🍓
-        <br />
-
-        He was Born in <span itemprop="address">India</span> and did his schooling in <span itemprop="address">Delhi & Haryana</span> and Dropped out of High School.
-      </p> -->
-      <Protection />
-
-      <div class="intro">
+        </p>
+        <p>
+          Dropped out of High School while working at <a href="https://">Zerops</a> where I worked around developer relations / experience and marketing.
+        </p>
         <p>
           I Love Running / Pull Ups and Yapping to my Friends via Discord VC & FaceTime.
         </p>
-      </div>
-      <p>You can touch me at hey@arjunaditya.xyz I'm also on LinkedIn, X and Instagram.</p>
-      <div class="other">
         <Rainbow />
         <p>
-           Wanna Chat? <a href="https://discord.gg/nermalcat69" class="inline-link">Discord</a>, <a href="https://www.instagram.com/nermalcat69/" class="inline-link">Insta</a>, <a href="https://cal.com/arjunaditya" class="inline-link">Call Me</a>
+           Wanna Chat? <a href="https://discord.gg/nermalcat69" class="inline-link">Discord</a>, <a href="https://www.instagram.com/arjunaditya_" class="inline-link">Insta</a>, <a href="https://cal.com/arjunaditya" class="inline-link">Call Me</a>
+           or maybe <a href="mailto:hey@arjunaditya.xyz">hey@arjunaditya.xyz</a>.
         </p>
       </div>
-      <p>Want me to lead your Marketing Team at your Tech Startup? or Maybe smthg else? Yeah Sure - hmu.</p>
 
+      <p>I've been rejected a lot of times, but this is an ultramarathon, not a sprint.</p>
     </section>
   </Center>
 </BaseLayout>
@@ -96,6 +85,7 @@ import Protection from "../components/Protection.astro";
     display: flex;
     flex-direction: column;
     gap: var(--space-3xl);
+    padding: 0px 56px 0px 28px ;
     padding-block-end: var(--space-3xl);
   }
 
@@ -114,10 +104,13 @@ import Protection from "../components/Protection.astro";
   }
 
   .intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
     padding-block-start: var(--space-3xl);
 
     p {
-      font-size: var(--step-4);
+      font-size: var(--step-1);
       letter-spacing: var(--letter-spacing-condensed);
       line-height: var(--line-height-tight);
     }
@@ -125,7 +118,7 @@ import Protection from "../components/Protection.astro";
 
   .other {
     p {
-      font-size: var(--step-2);
+      font-size: var(--step-1);
       letter-spacing: var(--letter-spacing-condensed);
       line-height: var(--line-height-tight);
     }
