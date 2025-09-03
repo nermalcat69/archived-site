@@ -1,16 +1,25 @@
 ---
 import { getCollection, render } from "astro:content";
 import dayjs from "dayjs";
+import PostLink from "src/components/PostLink.astro";
 import { RelativeDate } from "src/components/RelativeDate/RelativeDate";
-import ProseLayout from "src/layouts/ProseLayout.astro";
+import { smartquotes } from "src/helpers/helpers";
+import BaseLayout from "src/layouts/BaseLayout.astro";
+import Center from "src/components/Center.astro";
+import PageHeader from "src/components/PageHeader.astro";
 
+// Get the specific Coldran Pathway post
+const posts = await getCollection("posts");
+const journalPosts = posts.filter(post => post.data.category === "journal" && post.id === "the-coldran-pathway");
+
+// Get now events
 const events = await getCollection("now");
 events.sort((a, b) => {
   return dayjs(b.data.date).isBefore(dayjs(a.data.date)) ? -1 : 1;
 });
 
-const title = "Now";
-const description = "How's Arjun's life going?";
+const title = "Logs & Journal";
+const description = "Get to know what's happening in my life";
 
 // Function to truncate text to approximately 60 words while preserving HTML tags
 function truncateToWords(text: string, maxWords: number = 60): { truncated: string; hasMore: boolean } {
@@ -44,8 +53,27 @@ function truncateToWords(text: string, maxWords: number = 60): { truncated: stri
 }
 ---
 
-<ProseLayout title={title} description={description}>
-  <ul class="events">
+<BaseLayout title={title} description={description} includeFooter padBottom>
+  <PageHeader title={title} description={description} />
+      <Center>
+    {
+      journalPosts.map((post) => (
+        <PostLink
+          url={`/posts/${post.id}`}
+          title={smartquotes(post.data.title)}
+          description={smartquotes(post.data.description)}
+          datePublished={post.data.datePublished}
+          features={post.data.features}
+          logo={post.data.img?.src.src}
+          showImageAbove={true}
+        />
+      ))
+    }
+    <br />
+    <br />
+    <br />
+
+    <ul class="events">
     {
       events.map(async (event) => {
         const { Content } = await render(event);
@@ -59,7 +87,6 @@ function truncateToWords(text: string, maxWords: number = 60): { truncated: stri
             <span class="heading">
               <RelativeDate date={event.data.date} client:load />
             </span>
-            <div class="line" aria-hidden />
             <div class="content">
               <div class="content-preview" data-event-id={event.id}>
                 <div class="preview-text" set:html={truncated} />
@@ -92,6 +119,7 @@ function truncateToWords(text: string, maxWords: number = 60): { truncated: stri
       </div>
     </li>
   </ul>
+  </Center>
 
   <script>
     // Add event listeners when the DOM is loaded
@@ -134,6 +162,37 @@ function truncateToWords(text: string, maxWords: number = 60): { truncated: stri
   </script>
 
   <style lang="scss">
+    section {
+      margin-bottom: var(--space-2xl);
+      
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-l);
+      
+      h2 {
+        margin: 0;
+        color: var(--gray-12);
+      }
+    }
+
+    .view-all {
+      color: var(--gray-11);
+      text-decoration: none;
+      font-size: var(--step--1);
+      
+      &:hover {
+        color: var(--gray-12);
+        text-decoration: underline;
+      }
+    }
+
     .events {
       list-style: none;
       padding: 0;
@@ -164,15 +223,7 @@ function truncateToWords(text: string, maxWords: number = 60): { truncated: stri
       place-self: center center;
     }
 
-    .line {
-      grid-area: line;
-      width: 2px;
-      background-color: var(--gray-7);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      justify-self: center;
-    }
+
 
     .heading {
       color: var(--gray-11);
@@ -211,4 +262,4 @@ function truncateToWords(text: string, maxWords: number = 60): { truncated: stri
       padding-block-end: var(--space-xl);
     }
   </style>
-</ProseLayout>
+</BaseLayout>
