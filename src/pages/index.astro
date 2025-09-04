@@ -4,7 +4,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductsSection from "../components/ProductsSection.astro";
 import Rainbow from "../components/Rainbow.astro";
 import Protection from "../components/Protection.astro";
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+import { smartquotes } from "src/helpers/helpers";
+import PostLink from "src/components/PostLink.astro";
+
+
+
+const posts = await getCollection("posts");
+posts.sort((a, b) => {
+  return dayjs(b.data.datePublished).isBefore(dayjs(a.data.datePublished))
+    ? -1
+    : 1;
+});
+
+const ITEMS_LIMIT = 4;
+const writingPosts = posts.filter(post => !post.data.category || post.data.category === "writing");
+const limitedWritingPosts = writingPosts.slice(0, ITEMS_LIMIT);
+
 ---
+
 
 <BaseLayout
   title="Arjun Aditya"
@@ -14,25 +33,48 @@ import Protection from "../components/Protection.astro";
   <Center>
     <section class="home" role="main" itemscope itemtype="https://schema.org/Person">
       <h1 class="visuallyhidden">Arjun Aditya is a Founder of Coldran and designs for the web.</h1>
-      <div class="intro" data-content="primary">
+      <div class="intro pb-20" data-content="primary">
         <p>
         <a href="/about" itemprop="name">Arjun Aditya</a> is
           building <a href="https://coldran.com" target="_blank">Coldran</a>. Helping Teams work better with Customers.
           <br/>
         </p>
+                <img src="./coldran-buttons.svg" draggable="false"  width="40%" class="pb-20" alt="Coldran Agent Buttons">
+
         <p>
           Dropped out of High School while working at <a href="https://">Zerops</a> where I worked around developer relations / experience and marketing.
         </p>
         <p>
+          I started programming when I was 10 years old and have been coding ever since.
+        </p>
+        <Protection />
+
+      {
+        limitedWritingPosts.map((post) => (
+          <PostLink
+            url={`posts/${post.id}`}
+            title={smartquotes(post.data.title)}
+            description={smartquotes(post.data.description)}
+            datePublished={post.data.datePublished}
+            features={post.data.features}
+          />
+        ))
+      }
+              {writingPosts.length > ITEMS_LIMIT && (
+                <a href="/writings/posts" class="view-all">View All ({writingPosts.length})</a>
+              )}
+      </div>
+      </div>
+        <p>
           I Love Running / Pull Ups and Yapping to my Friends via Discord VC & FaceTime.
         </p>
+        <div>
         <Rainbow />
         <p>
            Wanna Chat? <a href="https://discord.gg/nermalcat69" class="inline-link">Discord</a>, <a href="https://www.instagram.com/arjunaditya_" class="inline-link">Insta</a>, <a href="https://cal.com/arjunaditya" class="inline-link">Call Me</a>
            or maybe <a href="mailto:hey@arjunaditya.xyz">hey@arjunaditya.xyz</a>.
         </p>
-      </div>
-
+        </div>
       <p>I've been rejected a lot of times, but this is an ultramarathon, not a sprint.</p>
     </section>
   </Center>
@@ -106,7 +148,7 @@ import Protection from "../components/Protection.astro";
   .intro {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-l);
     padding-block-start: var(--space-3xl);
 
     p {
