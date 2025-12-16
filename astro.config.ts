@@ -13,7 +13,7 @@ import { autolinkConfig } from "./plugins/rehype-autolink-config";
 import astroLLMsGenerator from 'astro-llms-generate';
 
 export default defineConfig({
-  site: "https://arjunaditya.xyz",
+  site: "https://archived.arjunaditya.xyz",
   prefetch: true,
   integrations: [
     astroLLMsGenerator(),

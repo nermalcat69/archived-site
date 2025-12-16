@@ -8,7 +8,7 @@
 
 # Arjun Aditya
 
-This is the source code for [arjunaditya.xyz](https://arjunaditya.xyz), designed, coded, and written by Eva—that's me! It's a place for me to share notes and learn in public. I try to update things regularly.
+This is the source code for [arjunaditya.xyz](https://archived.arjunaditya.xyz), designed, coded, and written by Eva—that's me! It's a place for me to share notes and learn in public. I try to update things regularly.
 
 For information about the technology and tools behind the site, visit [arjunaditya.xyz/colophon](https://archived.arjunaditya.xyz/colophon).
 
