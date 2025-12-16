@@ -34,9 +34,9 @@ export default defineConfig({
     }),
     sitemap({
       customPages: [
-        "https://arjunaditya.xyz/llms.txt",
-        "https://arjunaditya.xyz/llms-full.txt",
-        "https://arjunaditya.xyz/llms-small.txt"],
+        "https://archived.arjunaditya.xyz/llms.txt",
+        "https://archived.arjunaditya.xyz/llms-full.txt",
+        "https://archived.arjunaditya.xyz/llms-small.txt"],
       }),
   ],
   trailingSlash: "never",

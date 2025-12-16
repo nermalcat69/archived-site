@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1454513e-f8a3-468f-9f62-933c9225d8c2/deploy-status)](https://app.netlify.com/sites/eva-town/deploys) [![RSS](https://img.shields.io/badge/RSS-gray?logo=rss&logoColor=white&labelColor=eb7817)](https://arjunaditya.xyz/rss.xml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1454513e-f8a3-468f-9f62-933c9225d8c2/deploy-status)](https://app.netlify.com/sites/eva-town/deploys) [![RSS](https://img.shields.io/badge/RSS-gray?logo=rss&logoColor=white&labelColor=eb7817)](https://archived.arjunaditya.xyz/rss.xml)
 
 </div>
 
@@ -10,7 +10,7 @@
 
 This is the source code for [arjunaditya.xyz](https://arjunaditya.xyz), designed, coded, and written by Eva—that's me! It's a place for me to share notes and learn in public. I try to update things regularly.
 
-For information about the technology and tools behind the site, visit [arjunaditya.xyz/colophon](https://arjunaditya.xyz/colophon).
+For information about the technology and tools behind the site, visit [arjunaditya.xyz/colophon](https://archived.arjunaditya.xyz/colophon).
 
 > [!NOTE]
 > You're welcome to fork this site, use it as inspiration, and modify things for your own projects—just don't steal it or try to claim it as your own. When in doubt, message me and we can chat about what you want to do.

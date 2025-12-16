@@ -45,4 +45,4 @@ User-agent: Webzio-Extended
 User-agent: YouBot
 Disallow: /
 
-Sitemap: https://arjunaditya.xyz/sitemap-index.xml
+Sitemap: https://archived.arjunaditya.xyz/sitemap-index.xml
