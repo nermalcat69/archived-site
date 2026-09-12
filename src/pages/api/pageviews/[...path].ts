@@ -22,11 +22,8 @@ export const GET: APIRoute = async ({ params, request }) => {
     });
   } catch (error) {
     console.error('Error getting page views:', error);
-    return new Response(JSON.stringify({ 
-      error: 'Failed to get page views',
-      views: 0 
-    }), {
-      status: 500,
+    return new Response(JSON.stringify({ views: 0 }), {
+      status: 200,
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-cache',
@@ -69,11 +66,8 @@ export const POST: APIRoute = async ({ params, request }) => {
     });
   } catch (error) {
     console.error('Error incrementing page views:', error);
-    return new Response(JSON.stringify({ 
-      error: 'Failed to increment page views',
-      views: 0 
-    }), {
-      status: 500,
+    return new Response(JSON.stringify({ views: 0 }), {
+      status: 200,
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-cache',

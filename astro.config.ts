@@ -2,7 +2,7 @@ import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
-import vercel from "@astrojs/vercel";
+import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
@@ -40,7 +40,7 @@ export default defineConfig({
       }),
   ],
   trailingSlash: "never",
-  adapter: vercel(),
+  adapter: cloudflare(),
   markdown: {
     rehypePlugins: [
       rehypeHeadingIds,

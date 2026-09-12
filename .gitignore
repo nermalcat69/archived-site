@@ -20,6 +20,10 @@ dist/
 .netlify
 _site/
 
+# Cloudflare
+.wrangler/
+.dev.vars
+
 # Logs
 .lighthouseci/
 *.log
